@@ -1,9 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 javabattleship,com.battleship,LocalPlayer,8,0,0,0,2,0,2,0,2,0
+javabattleship,com.battleship,Ship,22,0,4,0,6,0,3,0,1,0
 javabattleship,com.battleship,GameController,3,0,0,0,1,0,1,0,1,0
 javabattleship,com.battleship,BotPlayer,8,0,0,0,2,0,2,0,2,0
-javabattleship,com.battleship,Cell,2,53,1,7,1,18,1,9,0,6
+javabattleship,com.battleship,Cell,2,56,1,7,1,19,1,9,0,6
 javabattleship,com.battleship,UserInput,25,0,0,0,8,0,2,0,2,0
 javabattleship,com.battleship,ScreenWriter,4,10,0,0,2,4,1,2,1,2
 javabattleship,com.battleship,Main,19,0,0,0,7,0,2,0,2,0
-javabattleship,com.battleship,GameBoard,3,0,0,0,1,0,1,0,1,0
+javabattleship,com.battleship,GameBoard,0,48,0,4,0,7,0,4,0,2

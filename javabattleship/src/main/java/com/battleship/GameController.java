@@ -1,5 +1,6 @@
 package com.battleship;
 
-public class GameController {
+public interface GameController {
     
+    public void startGame();
 }

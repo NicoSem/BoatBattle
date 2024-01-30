@@ -5,9 +5,11 @@ import java.util.regex.*;
 public class Cell {
     private String coordinates;
     private String state;
+    private Ship ship;
 
     public Cell(String coordinates) {
         state = "none";
+        ship = null;
         if (isValidCoordinates(coordinates)) {
             this.coordinates = coordinates;
         } else {
@@ -25,18 +27,29 @@ public class Cell {
         }
     }
 
-    public boolean attackCell() {
-        state = "miss";
-        return false;
+    public String attackAndGetHitType() {
+        if (ship == null) {
+            state = "miss";
+            return "miss";
+        } else {
+            state = "hit";
+            return "hit";
+        }
+        
     }
 
     private static boolean isValidCoordinates(String coordinateToCheck) {
-        Pattern pattern = Pattern.compile("[0-9][0-9]");
-        if (coordinateToCheck.equals("A0")) {
+        Pattern pattern = Pattern.compile("\\b[0-9][0-9]\\b");
+        Matcher matcher = pattern.matcher(coordinateToCheck);
+        if (matcher.find()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
     }
 
     public String getState() {
@@ -45,5 +58,9 @@ public class Cell {
 
     public String getCoordinates() {
         return coordinates;
+    }
+
+    public Ship getShip(){
+        return ship;
     }
 }
