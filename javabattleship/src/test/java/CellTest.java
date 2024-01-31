@@ -9,9 +9,12 @@ public class CellTest {
 
     @Test
     public void testConstructor() {
-        Cell cell = new Cell("00");
+        Cell cell1 = new Cell("00");
+        Cell cell2 = new Cell(0, 0);
 
-        Assert.assertEquals(cell.getState(), "none");
+        Assert.assertEquals(cell1.getState(), "none");
+        Assert.assertEquals(cell2.getState(), "none");
+        Assert.assertTrue(cell1.equals(cell2));
     }
 
     @Test

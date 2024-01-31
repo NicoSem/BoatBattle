@@ -5,21 +5,25 @@ public class GameBoard {
 
     public GameBoard() {
         cells = new Cell[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                cells[i][j] = new Cell(Integer.toString(i) + Integer.toString(j));
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                cells[row][col] = new Cell(row, col);
             }
         }
     }
 
-    public Cell cellAt(int i, int j) {
-        return cells[i][j];
+    public Cell cellAt(int row, int col) {
+        return cells[row][col];
     }
 
     public Cell cellAt(String coordinates) {
         int i = Character.getNumericValue(coordinates.charAt(0));
         int j = Character.getNumericValue(coordinates.charAt(1));
         return cells[i][j];
+    }
+
+    public String attackCellAndGetHitType(String coordinates){
+        return cellAt(coordinates).attackAndGetHitType();
     }
 
     public String rowToString(int row) {
@@ -32,32 +36,32 @@ public class GameBoard {
         return rowString;
     }
 
-    public Cell[] getCellArrayAt(int i, int j, int size, char direction) {
-        Cell[] cellArray;
+    public Cell[] getCellArrayAt(int row, int col, int size, char direction) {
+        Cell[] cellArray = new Cell[0];
         try {
             if (direction == 'u') {
-                if (i + 1 - size < 0) {
-                    throw new Exception();
+                if (row + 1 - size >= 0) {
+                    cellArray = cellArrayAt(row, col, size, direction);
                 } else {
-                    cellArray = CellArrayAt(i, j, size, direction);
+                    throw new Exception();
                 }
             } else if (direction == 'd') {
-                if (i + 1 + size > 10) {
-                    throw new Exception();
+                if (row + size < 10) {
+                    cellArray = cellArrayAt(row, col, size, direction);
                 } else {
-                    cellArray = CellArrayAt(i, j, size, direction);
+                    throw new Exception();
                 }
             } else if (direction == 'l') {
-                if (j + 1 - size < 0) {
-                    throw new Exception();
+                if (col + 1 - size <= 0) {
+                    cellArray = cellArrayAt(row, col, size, direction);
                 } else {
-                    cellArray = CellArrayAt(i, j, size, direction);
+                    throw new Exception();
                 }
             } else if (direction == 'r') {
-                if (i + 1 + size > 10) {
-                    throw new Exception();
+                if (col + size < 10) {
+                    cellArray = cellArrayAt(row, col, size, direction);
                 } else {
-                    cellArray = CellArrayAt(i, j, size, direction);
+                    throw new Exception();
                 }
             } else {
                 throw new Exception();
@@ -69,9 +73,19 @@ public class GameBoard {
         return cellArray;
     }
 
-    private Cell[] CellArrayAt(int i, int j, int size, char direction) {
+    private Cell[] cellArrayAt(int row, int col, int size, char direction) {
         Cell[] cellArray = new Cell[size];
-        for (int )
+        for (int i = 0; i < size; i++) {
+            if (direction == 'u') {
+                cellArray[i] = cells[row - i][col];
+            } else if (direction == 'd') {
+                cellArray[i] = cells[row + i][col];
+            } else if (direction == 'l') {
+                cellArray[i] = cells[row][col - i];
+            } else if (direction == 'r') {
+                cellArray[i] = cells[row][col + i];
+            }
+        }
 
         return cellArray;
     }

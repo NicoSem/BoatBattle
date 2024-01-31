@@ -17,6 +17,17 @@ public class Cell {
         }
     }
 
+    public Cell(int row, int col) {
+        state = "none";
+        ship = null;
+        String coordinates = Integer.toString(row) + Integer.toString(col);
+        if (isValidCoordinates(coordinates)) {
+            this.coordinates = coordinates;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public String toString() {
         if (state.equals("miss")) {
             return "o";
@@ -35,7 +46,6 @@ public class Cell {
             state = "hit";
             return "hit";
         }
-        
     }
 
     private static boolean isValidCoordinates(String coordinateToCheck) {
@@ -62,5 +72,9 @@ public class Cell {
 
     public Ship getShip(){
         return ship;
+    }
+
+    public boolean equals(Cell otherCell){
+        return this.getCoordinates().equals(otherCell.getCoordinates());
     }
 }

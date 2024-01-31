@@ -11,16 +11,20 @@ public class SinglePlayerGameController implements GameController{
 
     @Override
     public void startGame() {
-        GameBoard gameBoard = new GameBoard();
-        screenWriter.printBoard(gameBoard);
+        LocalPlayer localPlayer = new LocalPlayer();
+        BotPlayer botPlayer = new BotPlayer();
+        screenWriter.printBoard(botPlayer.getBoard());
 
-        System.out.println("Enter coordinates");
-        Cell cell = gameBoard.cellAt(userInput.getCoordinateInput());
+        while (true) {
+            System.out.println("Enter coordinates");
+            String attackCoordinates = userInput.getCoordinateInput();
+            if (attackCoordinates.equals("exit")) {
+                break;
+            }
+            botPlayer.attackAtAndGetHitType(attackCoordinates);
+            screenWriter.clearConsole();
+            screenWriter.printBoard(botPlayer.getBoard());
+        }
         
-        cell.attackAndGetHitType();
-        screenWriter.clearConsole();
-        screenWriter.printBoard(gameBoard);
     }
-
-    
 }
