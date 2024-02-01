@@ -4,7 +4,7 @@ import java.io.*;
 
 public class UserInput {
     private BufferedReader bufferedReader;
-    
+
     public UserInput() {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -13,18 +13,17 @@ public class UserInput {
         try {
             int integerInput = Integer.parseInt(bufferedReader.readLine());
             return integerInput;
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
             return 0;
         }
     }
 
-    public String getCoordinateInput() {
+    public String getStringInput() {
         try {
             String coordinates = bufferedReader.readLine();
             return coordinates;
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
             return null;
         }

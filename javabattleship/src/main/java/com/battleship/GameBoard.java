@@ -22,7 +22,7 @@ public class GameBoard {
         return cells[i][j];
     }
 
-    public String attackCellAndGetHitType(String coordinates){
+    public String attackCellAndGetHitType(String coordinates) {
         return cellAt(coordinates).attackAndGetHitType();
     }
 
@@ -66,10 +66,10 @@ public class GameBoard {
             } else {
                 throw new Exception();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
-        
+
         return cellArray;
     }
 
@@ -88,5 +88,13 @@ public class GameBoard {
         }
 
         return cellArray;
+    }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
     }
 }

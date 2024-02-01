@@ -36,6 +36,7 @@ public class Cell {
         } else {
             return ".";
         }
+
     }
 
     public String attackAndGetHitType() {
@@ -70,11 +71,11 @@ public class Cell {
         return coordinates;
     }
 
-    public Ship getShip(){
+    public Ship getShip() {
         return ship;
     }
 
-    public boolean equals(Cell otherCell){
+    public boolean equals(Cell otherCell) {
         return this.getCoordinates().equals(otherCell.getCoordinates());
     }
 }

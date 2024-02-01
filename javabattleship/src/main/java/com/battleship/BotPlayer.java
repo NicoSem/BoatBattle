@@ -3,9 +3,11 @@ package com.battleship;
 public class BotPlayer implements Player {
     private GameBoard gameBoard;
     private Ship[] ships;
+    private AttackStrategy attackStrategy;
 
-    public BotPlayer(){
+    public BotPlayer() {
         gameBoard = new GameBoard();
+        attackStrategy = new EasyAttackStrategy(gameBoard);
 
         ships = new Ship[5];
         ships[0] = new Ship(gameBoard.getCellArrayAt(0, 0, 5, 'd'));
@@ -17,8 +19,7 @@ public class BotPlayer implements Player {
 
     @Override
     public String getAttackCoordinates() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAttackCoordinates'");
+        return attackStrategy.getCoordinates();
     }
 
     @Override
@@ -27,7 +28,7 @@ public class BotPlayer implements Player {
     }
 
     @Override
-    public GameBoard getBoard(){
+    public GameBoard getBoard() {
         return gameBoard;
     }
 }
