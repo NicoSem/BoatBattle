@@ -23,4 +23,8 @@ public class EasyAttackStrategy implements AttackStrategy {
         return attackedCell.getCoordinates();
     }
 
+    public List<Cell> getCellList() {
+        return cellsToAttack;
+    }
+
 }

@@ -19,6 +19,7 @@ public class LocalPlayer implements Player {
 
     @Override
     public String getAttackCoordinates() {
+        System.out.println("Enter coordinates");
         return userInput.getStringInput();
     }
 
@@ -30,6 +31,11 @@ public class LocalPlayer implements Player {
     @Override
     public GameBoard getBoard() {
         return gameBoard;
+    }
+
+    @Override
+    public Ship[] getShips() {
+        return ships;
     }
 
 }

@@ -3,6 +3,8 @@ package com.battleship;
 public class SinglePlayerGameController implements GameController {
     private static ScreenWriter screenWriter;
     private static UserInput userInput;
+    private Player attackingPlayer;
+    private Player defendingPlayer;
 
     public SinglePlayerGameController() {
         screenWriter = new ScreenWriter();
@@ -13,26 +15,26 @@ public class SinglePlayerGameController implements GameController {
     public void startGame() {
         LocalPlayer localPlayer = new LocalPlayer();
         BotPlayer botPlayer = new BotPlayer();
-        screenWriter.printBoard(botPlayer.getBoard());
+        attackingPlayer = localPlayer;
+        defendingPlayer = botPlayer;
 
         while (true) {
-            System.out.println("Enter coordinates");
-            String attackCoordinates = localPlayer.getAttackCoordinates();
-            if (attackCoordinates.equals("exit")) {
-                break;
-            }
-            botPlayer.attackAtAndGetHitType(attackCoordinates);
+            playTurn(attackingPlayer, defendingPlayer);
 
-            attackCoordinates = botPlayer.getAttackCoordinates();
-            localPlayer.attackAtAndGetHitType(attackCoordinates);
-            screenWriter.clearConsole();
+            screenWriter.printTurnResult(localPlayer.getBoard(), botPlayer.getBoard());
 
-            System.out.println("Enemy Board");
-            screenWriter.printBoard(botPlayer.getBoard());
-
-            System.out.println("Your Board");
-            screenWriter.printBoard(localPlayer.getBoard());
+            swapPlayers();
         }
+    }
 
+    private void playTurn(Player attackingPlayer, Player enemyPlayer) {
+        String attackCoordinates = attackingPlayer.getAttackCoordinates();
+        defendingPlayer.attackAtAndGetHitType(attackCoordinates);
+    }
+
+    private void swapPlayers() {
+        Player tmp = attackingPlayer;
+        attackingPlayer = defendingPlayer;
+        defendingPlayer = tmp;
     }
 }

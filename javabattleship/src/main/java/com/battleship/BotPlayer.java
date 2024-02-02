@@ -31,4 +31,9 @@ public class BotPlayer implements Player {
     public GameBoard getBoard() {
         return gameBoard;
     }
+
+    @Override
+    public Ship[] getShips() {
+        return ships;
+    }
 }
