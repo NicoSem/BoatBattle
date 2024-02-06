@@ -4,14 +4,31 @@ public class Ship {
     private int size;
     private Cell[] cells;
 
-<span class="nc" id="L7">    public Ship(Cell[] cells) {</span>
-<span class="nc" id="L8">        size = cells.length;</span>
-<span class="nc bnc" id="L9" title="All 4 branches missed.">        if (size &lt; 1 || size &gt; 5) {</span>
-<span class="nc" id="L10">            throw new IllegalArgumentException();</span>
+<span class="fc" id="L7">    public Ship(Cell[] cells) {</span>
+<span class="fc" id="L8">        size = cells.length;</span>
+<span class="pc bpc" id="L9" title="2 of 4 branches missed.">        if (size &lt; 1 || size &gt; 5) {</span>
+<span class="nc" id="L10">            throw new IllegalArgumentException(&quot;Ship of cell count &quot; + size + &quot; cannot be created&quot;);</span>
         } else {
-<span class="nc" id="L12">            this.cells = cells;</span>
+<span class="fc" id="L12">            this.cells = cells;</span>
+        }
+
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        for (Cell cell : this.cells) {</span>
+<span class="fc" id="L16">            cell.setShip(this);</span>
+        }
+<span class="fc" id="L18">    }</span>
+
+    public int getSize() {
+<span class="fc" id="L21">        return size;</span>
+    }
+
+    public boolean isSunk() {
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        for (Cell cell : cells) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            if (cell.getState() != &quot;hit&quot;) {</span>
+<span class="nc" id="L27">                return false;</span>
+            }
         }
         
-<span class="nc" id="L15">    }</span>
+<span class="nc" id="L31">        return true;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

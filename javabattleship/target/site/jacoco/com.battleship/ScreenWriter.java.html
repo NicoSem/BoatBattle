@@ -3,20 +3,35 @@
 <span class="fc" id="L3">public class ScreenWriter {</span>
 
     public void printStartMenu() {
-<span class="fc" id="L6">        System.out.println( &quot;######     #    ####### ####### #       #######  #####  #     # ### ######  \r\n&quot; + //</span>
-                            &quot;#     #   # #      #       #    #       #       #     # #     #  #  #     # \r\n&quot; + //
-                            &quot;#     #  #   #     #       #    #       #       #       #     #  #  #     # \r\n&quot; + //
-                            &quot;######  #     #    #       #    #       #####    #####  #######  #  ######  \r\n&quot; + //
-                            &quot;#     # #######    #       #    #       #             # #     #  #  #       \r\n&quot; + //
-                            &quot;#     # #     #    #       #    #       #       #     # #     #  #  #       \r\n&quot; + //
-                            &quot;######  #     #    #       #    ####### #######  #####  #     # ### #       \r\n&quot;
-        );
+<span class="fc" id="L6">        System.out.println(&quot;######     #    ####### ####### #       #######  #####  #     # ### ######  \r\n&quot; + //</span>
+                &quot;#     #   # #      #       #    #       #       #     # #     #  #  #     # \r\n&quot; + //
+                &quot;#     #  #   #     #       #    #       #       #       #     #  #  #     # \r\n&quot; + //
+                &quot;######  #     #    #       #    #       #####    #####  #######  #  ######  \r\n&quot; + //
+                &quot;#     # #######    #       #    #       #             # #     #  #  #       \r\n&quot; + //
+                &quot;#     # #     #    #       #    #       #       #     # #     #  #  #       \r\n&quot; + //
+                &quot;######  #     #    #       #    ####### #######  #####  #     # ### #       \r\n&quot;);
 
-<span class="fc" id="L15">        System.out.println(&quot;Select number of players (1, 2)&quot;);</span>
-<span class="fc" id="L16">    };</span>
+<span class="fc" id="L14">        System.out.println(&quot;Select number of players (1, 2)&quot;);</span>
+<span class="fc" id="L15">    };</span>
 
     public void clearConsole() {
-<span class="nc" id="L19">        System.out.print(&quot;\033[H\033[2J&quot;);</span>
-<span class="nc" id="L20">    }</span>
+<span class="nc" id="L18">        System.out.print(&quot;\033[H\033[2J&quot;);</span>
+<span class="nc" id="L19">    }</span>
+
+    public void printBoard(GameBoard gameBoard) {
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc" id="L23">            System.out.println(gameBoard.rowToString(i));</span>
+        }
+<span class="nc" id="L25">    }</span>
+
+    public void printTurnResult(GameBoard friendlyBoard, GameBoard enemyBoard) {
+<span class="nc" id="L28">        clearConsole();</span>
+
+<span class="nc" id="L30">        System.out.println(&quot;Enemy Board&quot;);</span>
+<span class="nc" id="L31">        printBoard(enemyBoard);</span>
+
+<span class="nc" id="L33">        System.out.println(&quot;Your Board&quot;);</span>
+<span class="nc" id="L34">        printBoard(friendlyBoard);</span>
+<span class="nc" id="L35">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

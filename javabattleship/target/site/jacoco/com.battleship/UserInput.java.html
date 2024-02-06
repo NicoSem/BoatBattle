@@ -4,21 +4,29 @@ import java.io.*;
 
 public class UserInput {
     private BufferedReader bufferedReader;
-    
-<span class="nc" id="L8">    public UserInput() {</span>
-<span class="nc" id="L9">        bufferedReader = new BufferedReader(new InputStreamReader(System.in));</span>
-<span class="nc" id="L10">    }</span>
+
+<span class="fc" id="L8">    public UserInput() {</span>
+<span class="fc" id="L9">        bufferedReader = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="fc" id="L10">    }</span>
 
     public int getIntegerInput() {
         try {
 <span class="nc" id="L14">            int integerInput = Integer.parseInt(bufferedReader.readLine());</span>
 <span class="nc" id="L15">            return integerInput;</span>
-        } 
-<span class="nc" id="L17">        catch (IOException e) {</span>
-<span class="nc" id="L18">            System.out.println(e);</span>
-<span class="nc" id="L19">            return 0;</span>
+<span class="nc" id="L16">        } catch (IOException e) {</span>
+<span class="nc" id="L17">            System.out.println(e);</span>
+<span class="nc" id="L18">            return 0;</span>
         }
-        
+    }
+
+    public String getStringInput() {
+        try {
+<span class="nc" id="L24">            String coordinates = bufferedReader.readLine();</span>
+<span class="nc" id="L25">            return coordinates;</span>
+<span class="nc" id="L26">        } catch (IOException e) {</span>
+<span class="nc" id="L27">            System.out.println(e);</span>
+<span class="nc" id="L28">            return null;</span>
+        }
     }
 
 }

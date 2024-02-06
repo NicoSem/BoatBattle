@@ -16,6 +16,18 @@ public class BoardTest {
     }
 
     @Test
+    public void testCellAt() {
+        GameBoard board = new GameBoard();
+
+        Cell cell = board.cellAt(3, 4);
+        Assert.assertEquals(cell.getCoordinates(), "34");
+
+
+        cell = board.cellAt("56");
+        Assert.assertEquals(cell.getCoordinates(), "56");
+    }
+
+    @Test
     public void testGetCellArray() {
         GameBoard board = new GameBoard();
         Cell[] testArray = new Cell[1];

@@ -2,14 +2,19 @@
 
 <span class="nc" id="L3">public class Main {</span>
     private static ScreenWriter screenWriter;
-    private static UserInput screenReader;
+    private static UserInput userInput;
     public static void main(String[] args) throws Exception {
 <span class="nc" id="L7">        screenWriter = new ScreenWriter();</span>
 <span class="nc" id="L8">        screenWriter.printStartMenu();</span>
         
-<span class="nc" id="L10">        screenReader = new UserInput();</span>
-<span class="nc" id="L11">        int numberOfPlayers = screenReader.getIntegerInput();</span>
-<span class="nc" id="L12">        screenWriter.clearConsole();</span>
-<span class="nc" id="L13">    }</span>
+<span class="nc" id="L10">        userInput = new UserInput();</span>
+<span class="nc" id="L11">        int numberOfPlayers = userInput.getIntegerInput();</span>
+<span class="nc" id="L12">        GameController gameController = new SinglePlayerGameController();</span>
+<span class="nc" id="L13">        screenWriter.clearConsole();</span>
+
+<span class="nc" id="L15">        gameController.startGame();</span>
+
+        
+<span class="nc" id="L18">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

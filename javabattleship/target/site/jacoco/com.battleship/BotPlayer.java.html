@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BotPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javabattleship</a> &gt; <a href="index.source.html" class="el_package">com.battleship</a> &gt; <span class="el_source">BotPlayer.java</span></div><h1>BotPlayer.java</h1><pre class="source lang-java linenums">package com.battleship;
 
-<span class="nc" id="L3">public class BotPlayer implements Player {</span>
+public class BotPlayer implements Player {
+    private GameBoard gameBoard;
+    private Ship[] ships;
+    private AttackStrategy attackStrategy;
+
+<span class="nc" id="L8">    public BotPlayer() {</span>
+<span class="nc" id="L9">        gameBoard = new GameBoard();</span>
+<span class="nc" id="L10">        attackStrategy = new EasyAttackStrategy(gameBoard);</span>
+
+<span class="nc" id="L12">        ships = new Ship[5];</span>
+<span class="nc" id="L13">        ships[0] = new Ship(gameBoard.getCellArrayAt(0, 0, 5, 'd'));</span>
+<span class="nc" id="L14">        ships[1] = new Ship(gameBoard.getCellArrayAt(0, 1, 4, 'd'));</span>
+<span class="nc" id="L15">        ships[2] = new Ship(gameBoard.getCellArrayAt(0, 2, 3, 'd'));</span>
+<span class="nc" id="L16">        ships[3] = new Ship(gameBoard.getCellArrayAt(0, 3, 3, 'd'));</span>
+<span class="nc" id="L17">        ships[4] = new Ship(gameBoard.getCellArrayAt(0, 4, 2, 'd'));</span>
+<span class="nc" id="L18">    }</span>
 
     @Override
     public String getAttackCoordinates() {
-        // TODO Auto-generated method stub
-<span class="nc" id="L8">        throw new UnsupportedOperationException(&quot;Unimplemented method 'getAttackCoordinates'&quot;);</span>
+<span class="nc" id="L22">        return attackStrategy.getCoordinates();</span>
+    }
+
+    @Override
+    public String attackAtAndGetHitType(String coordinates) {
+<span class="nc" id="L27">        return gameBoard.attackCellAndGetHitType(coordinates);</span>
+    }
+
+    @Override
+    public GameBoard getBoard() {
+<span class="nc" id="L32">        return gameBoard;</span>
+    }
+
+    @Override
+    public Ship[] getShips() {
+<span class="nc" id="L37">        return ships;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

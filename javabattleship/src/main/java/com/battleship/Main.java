@@ -13,7 +13,6 @@ public class Main {
         screenWriter.clearConsole();
 
         gameController.startGame();
-
         
     }
 }
