@@ -7,13 +7,7 @@ public class EasyAttackStrategy implements AttackStrategy {
     private List<Cell> cellsToAttack;
 
     public EasyAttackStrategy(GameBoard gameBoard) {
-        cellsToAttack = new ArrayList<Cell>();
-        Cell[][] cells = gameBoard.getCells();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                cellsToAttack.add(cells[i][j]);
-            }
-        }
+        cellsToAttack = gameBoard.getCellsList();
     }
 
     @Override

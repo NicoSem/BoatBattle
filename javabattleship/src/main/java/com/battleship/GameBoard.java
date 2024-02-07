@@ -1,5 +1,8 @@
 package com.battleship;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameBoard {
     private Cell[][] cells;
 
@@ -94,7 +97,62 @@ public class GameBoard {
         return cells;
     }
 
+    public ArrayList<Cell> getCellsList() {
+        ArrayList<Cell> cellList = new ArrayList<Cell>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                cellList.add(cells[i][j]);
+            }
+        }
+
+        return cellList;
+    }
+
     public void setCells(Cell[][] cells) {
         this.cells = cells;
+    }
+
+    public Ship[] getShipsRandomized() {
+        ArrayList<Cell> possibleShipLocations = getCellsList();
+        boolean placed = false;
+        int[] shipSizes = {2, 3, 3, 4, 5};
+        char direction = 'd';
+        Ship[] ships = new Ship[5];
+
+        for (int shipSize : shipSizes) {
+            placed = false;
+            while(!placed) {
+                int randIndex = (int) (Math.random() * possibleShipLocations.size());
+                Cell randomCell = possibleShipLocations.get(randIndex);
+                int[] cellIntCoordintes = randomCell.getIntegerCoordinates();
+                try {
+                    Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));
+                    placed = true;
+                    possibleShipLocations.remove(randIndex);
+                    possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                } catch (Exception e1) {
+                    direction = 'r';
+                    try{
+                        Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));
+                        placed = true;
+                        possibleShipLocations.remove(randIndex);
+                        possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                    } catch (Exception e2) {
+                        possibleShipLocations.remove(randIndex);
+                        direction = 'd';
+                    }
+                }
+            }
+        }
+
+        return new Ship[0];
+    }
+
+    private ArrayList<Cell> removeCellsFromList(ArrayList<Cell> cellList, Cell[] cellsToRemove) {
+        for (Cell cell : cellsToRemove) {
+            cellList.remove(cell);
+        }
+
+        return cellList;
     }
 }

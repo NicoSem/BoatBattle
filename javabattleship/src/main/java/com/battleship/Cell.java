@@ -71,6 +71,13 @@ public class Cell {
         return coordinates;
     }
 
+    public int[] getIntegerCoordinates() {
+        int[] intCoordinates = new int[2];
+        intCoordinates[0] = Character.getNumericValue(coordinates.charAt(0));
+        intCoordinates[1] = Character.getNumericValue(coordinates.charAt(0));
+        return intCoordinates;
+    }
+
     public Ship getShip() {
         return ship;
     }
