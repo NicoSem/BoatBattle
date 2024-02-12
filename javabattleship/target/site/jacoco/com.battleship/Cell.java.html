@@ -12,7 +12,7 @@ public class Cell {
 <span class="fc" id="L12">        ship = null;</span>
 <span class="fc bfc" id="L13" title="All 2 branches covered.">        if (isValidCoordinates(coordinates)) {</span>
 <span class="fc" id="L14">            this.coordinates = coordinates;</span>
-        } else {
+<span class="fc" id="L15">        } else {</span>
 <span class="fc" id="L16">            throw new IllegalArgumentException();</span>
         }
 <span class="fc" id="L18">    }</span>
@@ -23,7 +23,7 @@ public class Cell {
 <span class="fc" id="L23">        String coordinates = Integer.toString(row) + Integer.toString(col);</span>
 <span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (isValidCoordinates(coordinates)) {</span>
 <span class="fc" id="L25">            this.coordinates = coordinates;</span>
-        } else {
+<span class="fc" id="L26">        } else {</span>
 <span class="nc" id="L27">            throw new IllegalArgumentException();</span>
         }
 <span class="fc" id="L29">    }</span>
@@ -71,12 +71,19 @@ public class Cell {
 <span class="fc" id="L71">        return coordinates;</span>
     }
 
+    public int[] getIntegerCoordinates() {
+<span class="fc" id="L75">        int[] intCoordinates = new int[2];</span>
+<span class="fc" id="L76">        intCoordinates[0] = Character.getNumericValue(coordinates.charAt(0));</span>
+<span class="fc" id="L77">        intCoordinates[1] = Character.getNumericValue(coordinates.charAt(0));</span>
+<span class="fc" id="L78">        return intCoordinates;</span>
+    }
+
     public Ship getShip() {
-<span class="fc" id="L75">        return ship;</span>
+<span class="fc" id="L82">        return ship;</span>
     }
 
     public boolean equals(Cell otherCell) {
-<span class="fc" id="L79">        return this.getCoordinates().equals(otherCell.getCoordinates());</span>
+<span class="fc" id="L86">        return this.getCoordinates().equals(otherCell.getCoordinates());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,101 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javabattleship</a> &gt; <a href="index.source.html" class="el_package">com.battleship</a> &gt; <span class="el_source">GameBoard.java</span></div><h1>GameBoard.java</h1><pre class="source lang-java linenums">package com.battleship;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameBoard {
     private Cell[][] cells;
 
-<span class="fc" id="L6">    public GameBoard() {</span>
-<span class="fc" id="L7">        cells = new Cell[10][10];</span>
-<span class="fc bfc" id="L8" title="All 2 branches covered.">        for (int row = 0; row &lt; 10; row++) {</span>
-<span class="fc bfc" id="L9" title="All 2 branches covered.">            for (int col = 0; col &lt; 10; col++) {</span>
-<span class="fc" id="L10">                cells[row][col] = new Cell(row, col);</span>
+<span class="fc" id="L9">    public GameBoard() {</span>
+<span class="fc" id="L10">        cells = new Cell[10][10];</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        for (int row = 0; row &lt; 10; row++) {</span>
+<span class="fc bfc" id="L12" title="All 2 branches covered.">            for (int col = 0; col &lt; 10; col++) {</span>
+<span class="fc" id="L13">                cells[row][col] = new Cell(row, col);</span>
             }
         }
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L16">    }</span>
 
     public Cell cellAt(int row, int col) {
-<span class="fc" id="L16">        return cells[row][col];</span>
+<span class="fc" id="L19">        return cells[row][col];</span>
     }
 
     public Cell cellAt(String coordinates) {
-<span class="nc" id="L20">        int i = Character.getNumericValue(coordinates.charAt(0));</span>
-<span class="nc" id="L21">        int j = Character.getNumericValue(coordinates.charAt(1));</span>
-<span class="nc" id="L22">        return cells[i][j];</span>
+<span class="fc" id="L23">        int i = Character.getNumericValue(coordinates.charAt(0));</span>
+<span class="fc" id="L24">        int j = Character.getNumericValue(coordinates.charAt(1));</span>
+<span class="fc" id="L25">        return cells[i][j];</span>
     }
 
     public String attackCellAndGetHitType(String coordinates) {
-<span class="nc" id="L26">        return cellAt(coordinates).attackAndGetHitType();</span>
+<span class="fc" id="L29">        return cellAt(coordinates).attackAndGetHitType();</span>
     }
 
     public String rowToString(int row) {
-<span class="nc" id="L30">        String rowString = &quot;&quot;;</span>
-<span class="nc" id="L31">        Cell[] cellRow = cells[row];</span>
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (Cell cell : cellRow) {</span>
-<span class="nc" id="L33">            rowString += cell + &quot; &quot;;</span>
+<span class="fc" id="L33">        String rowString = &quot;&quot;;</span>
+<span class="fc" id="L34">        Cell[] cellRow = cells[row];</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (Cell cell : cellRow) {</span>
+<span class="fc" id="L36">            rowString += cell + &quot; &quot;;</span>
         }
 
-<span class="nc" id="L36">        return rowString;</span>
+<span class="fc" id="L39">        return rowString;</span>
     }
 
     public Cell[] getCellArrayAt(int row, int col, int size, char direction) {
-<span class="fc" id="L40">        Cell[] cellArray = new Cell[0];</span>
+<span class="fc" id="L43">        Cell[] cellArray = new Cell[0];</span>
         try {
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (direction == 'u') {</span>
-<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                if (row + 1 - size &gt;= 0) {</span>
-<span class="fc" id="L44">                    cellArray = cellArrayAt(row, col, size, direction);</span>
-                } else {
-<span class="nc" id="L46">                    throw new Exception();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if (direction == 'u') {</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">                if (row + 1 - size &gt;= 0) {</span>
+<span class="fc" id="L47">                    cellArray = cellArrayAt(row, col, size, direction);</span>
+<span class="fc" id="L48">                } else {</span>
+<span class="nc" id="L49">                    throw new Exception();</span>
                 }
-<span class="fc bfc" id="L48" title="All 2 branches covered.">            } else if (direction == 'd') {</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                if (row + size &lt; 10) {</span>
-<span class="fc" id="L50">                    cellArray = cellArrayAt(row, col, size, direction);</span>
-                } else {
-<span class="nc" id="L52">                    throw new Exception();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            } else if (direction == 'd') {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                if (row + size &lt; 10) {</span>
+<span class="fc" id="L53">                    cellArray = cellArrayAt(row, col, size, direction);</span>
+<span class="fc" id="L54">                } else {</span>
+<span class="fc" id="L55">                    throw new Exception();</span>
                 }
-<span class="fc bfc" id="L54" title="All 2 branches covered.">            } else if (direction == 'l') {</span>
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">                if (col + 1 - size &lt;= 0) {</span>
-<span class="fc" id="L56">                    cellArray = cellArrayAt(row, col, size, direction);</span>
-                } else {
-<span class="nc" id="L58">                    throw new Exception();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            } else if (direction == 'l') {</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">                if (col + 1 - size &lt;= 0) {</span>
+<span class="fc" id="L59">                    cellArray = cellArrayAt(row, col, size, direction);</span>
+<span class="fc" id="L60">                } else {</span>
+<span class="nc" id="L61">                    throw new Exception();</span>
                 }
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">            } else if (direction == 'r') {</span>
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">                if (col + size &lt; 10) {</span>
-<span class="fc" id="L62">                    cellArray = cellArrayAt(row, col, size, direction);</span>
-                } else {
-<span class="nc" id="L64">                    throw new Exception();</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            } else if (direction == 'r') {</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">                if (col + size &lt; 10) {</span>
+<span class="fc" id="L65">                    cellArray = cellArrayAt(row, col, size, direction);</span>
+<span class="fc" id="L66">                } else {</span>
+<span class="fc" id="L67">                    throw new Exception();</span>
                 }
             } else {
-<span class="nc" id="L67">                throw new Exception();</span>
+<span class="nc" id="L70">                throw new Exception();</span>
             }
-<span class="nc" id="L69">        } catch (Exception e) {</span>
+<span class="fc" id="L72">        } catch (Exception e) {</span>
 
-<span class="fc" id="L71">        }</span>
+        }
 
-<span class="fc" id="L73">        return cellArray;</span>
+<span class="fc" id="L76">        return cellArray;</span>
     }
 
     private Cell[] cellArrayAt(int row, int col, int size, char direction) {
-<span class="fc" id="L77">        Cell[] cellArray = new Cell[size];</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (direction == 'u') {</span>
-<span class="fc" id="L80">                cellArray[i] = cells[row - i][col];</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">            } else if (direction == 'd') {</span>
-<span class="fc" id="L82">                cellArray[i] = cells[row + i][col];</span>
-<span class="fc bfc" id="L83" title="All 2 branches covered.">            } else if (direction == 'l') {</span>
-<span class="fc" id="L84">                cellArray[i] = cells[row][col - i];</span>
-<span class="pc bpc" id="L85" title="1 of 2 branches missed.">            } else if (direction == 'r') {</span>
-<span class="fc" id="L86">                cellArray[i] = cells[row][col + i];</span>
+<span class="fc" id="L80">        Cell[] cellArray = new Cell[size];</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            if (direction == 'u') {</span>
+<span class="fc" id="L83">                cellArray[i] = cells[row - i][col];</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            } else if (direction == 'd') {</span>
+<span class="fc" id="L85">                cellArray[i] = cells[row + i][col];</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            } else if (direction == 'l') {</span>
+<span class="fc" id="L87">                cellArray[i] = cells[row][col - i];</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">            } else if (direction == 'r') {</span>
+<span class="fc" id="L89">                cellArray[i] = cells[row][col + i];</span>
             }
         }
 
-<span class="fc" id="L90">        return cellArray;</span>
+<span class="fc" id="L93">        return cellArray;</span>
     }
 
     public Cell[][] getCells() {
-<span class="fc" id="L94">        return cells;</span>
+<span class="nc" id="L97">        return cells;</span>
+    }
+
+    public ArrayList&lt;Cell&gt; getCellsList() {
+<span class="fc" id="L101">        ArrayList&lt;Cell&gt; cellList = new ArrayList&lt;Cell&gt;();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">            for (int j = 0; j &lt; 10; j++) {</span>
+<span class="fc" id="L104">                cellList.add(cells[i][j]);</span>
+            }
+        }
+
+<span class="fc" id="L108">        return cellList;</span>
     }
 
     public void setCells(Cell[][] cells) {
-<span class="fc" id="L98">        this.cells = cells;</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L112">        this.cells = cells;</span>
+<span class="fc" id="L113">    }</span>
+
+    public Ship[] getShipsRandomized() {
+<span class="fc" id="L116">        ArrayList&lt;Cell&gt; possibleShipLocations = getCellsList();</span>
+<span class="fc" id="L117">        boolean placed = false;</span>
+<span class="fc" id="L118">        int[] shipSizes = {5, 4, 3, 3, 2};</span>
+<span class="fc" id="L119">        int shipIndex = 0;</span>
+<span class="fc" id="L120">        char direction = randomDirection();</span>
+<span class="fc" id="L121">        Ship[] ships = new Ship[5];</span>
+
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (int shipSize : shipSizes) {</span>
+<span class="fc" id="L124">            placed = false;</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">            while(!placed) {</span>
+<span class="fc" id="L126">                int randIndex = (int) (Math.random() * possibleShipLocations.size());</span>
+<span class="fc" id="L127">                Cell randomCell = possibleShipLocations.get(randIndex);</span>
+<span class="fc" id="L128">                int[] cellIntCoordintes = randomCell.getIntegerCoordinates();</span>
+                try {
+<span class="fc" id="L130">                    Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));</span>
+<span class="fc" id="L131">                    placed = true;</span>
+<span class="fc" id="L132">                    possibleShipLocations.remove(randIndex);</span>
+<span class="fc" id="L133">                    possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());</span>
+<span class="fc" id="L134">                    ships[shipIndex] = ship;</span>
+<span class="fc" id="L135">                    shipIndex++;</span>
+<span class="fc" id="L136">                } catch (Exception e1) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                    if (direction == 'r'){</span>
+<span class="fc" id="L138">                        direction = 'd';</span>
+<span class="fc" id="L139">                    } else {</span>
+<span class="fc" id="L140">                        direction = 'r';</span>
+                    }
+                    try{
+<span class="nc" id="L143">                        Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));</span>
+<span class="nc" id="L144">                        placed = true;</span>
+<span class="nc" id="L145">                        possibleShipLocations.remove(randIndex);</span>
+<span class="nc" id="L146">                        possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());</span>
+<span class="nc" id="L147">                        ships[shipIndex] = ship;</span>
+<span class="nc" id="L148">                        shipIndex++;</span>
+<span class="pc" id="L149">                    } catch (Exception e2) {</span>
+<span class="fc" id="L150">                        possibleShipLocations.remove(randIndex);</span>
+<span class="fc" id="L151">                        direction = randomDirection();</span>
+                    }
+                }
+            }
+        }
+
+<span class="fc" id="L157">        return ships;</span>
+    }
+
+    private ArrayList&lt;Cell&gt; removeCellsFromList(ArrayList&lt;Cell&gt; cellList, Cell[] cellsToRemove) {
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (Cell cell : cellsToRemove) {</span>
+<span class="fc" id="L162">            cellList.remove(cell);</span>
+        }
+
+<span class="fc" id="L165">        return cellList;</span>
+    }
+
+    private char randomDirection() {
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        if (Math.random() &lt; 0.5) {</span>
+<span class="fc" id="L170">            return 'd';</span>
+        } else {
+<span class="fc" id="L172">            return 'r';</span>
+        }
+    }
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

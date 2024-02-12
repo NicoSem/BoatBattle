@@ -19,9 +19,9 @@ public class SinglePlayerGameController implements GameController {
         defendingPlayer = botPlayer;
 
         while (true) {
-            playTurn(attackingPlayer, defendingPlayer);
-
             screenWriter.printTurnResult(localPlayer.getBoard(), botPlayer.getBoard());
+
+            playTurn(attackingPlayer, defendingPlayer);
 
             swapPlayers();
         }

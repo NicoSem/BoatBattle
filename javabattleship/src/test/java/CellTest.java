@@ -40,7 +40,12 @@ public class CellTest {
         Cell cell2 = new Cell("01");
         Cell[] cells = {cell1, cell2};
 
-        Ship ship = new Ship(cells);
+        Ship ship = null;
+        try {
+            ship = new Ship(cells);
+        } catch (Exception e) {
+            fail("Ship constructor threw unexpected exception");
+        }
 
         cell1.attackAndGetHitType();
         Assert.assertEquals(cell1.toString(), "x");
@@ -54,7 +59,13 @@ public class CellTest {
         Cell cell3 = new Cell("02");
         Cell[] cells = {cell1, cell2};
 
-        Ship ship = new Ship(cells);
+        Ship ship = null;
+
+        try {
+            ship = new Ship(cells);
+        } catch (Exception e) {
+            fail("Ship constructor threw unexpected exception");
+        }
 
         Assert.assertEquals(cell1.attackAndGetHitType(), "hit");
         Assert.assertEquals(cell2.attackAndGetHitType(), "hit");
@@ -67,7 +78,14 @@ public class CellTest {
         Cell cell2 = new Cell("01");
         Cell[] cells = {cell1, cell2};
 
-        Ship ship = new Ship(cells);
+        Ship ship = null;
+
+        try {
+            ship = new Ship(cells);
+        } catch (Exception e) {
+            fail("Ship constructor threw unexpected exception");
+        }
+        
 
         Assert.assertEquals(cell1.getShip(), ship);
         Assert.assertEquals(cell2.getShip(), ship);

@@ -9,33 +9,28 @@ public class LocalPlayer implements Player {
 <span class="fc" id="L9">        gameBoard = new UserGameBoard();</span>
 <span class="fc" id="L10">        userInput = new UserInput();</span>
 
-<span class="fc" id="L12">        ships = new Ship[5];</span>
-<span class="fc" id="L13">        ships[0] = new Ship(gameBoard.getCellArrayAt(0, 0, 5, 'd'));</span>
-<span class="fc" id="L14">        ships[1] = new Ship(gameBoard.getCellArrayAt(0, 1, 4, 'd'));</span>
-<span class="fc" id="L15">        ships[2] = new Ship(gameBoard.getCellArrayAt(0, 2, 3, 'd'));</span>
-<span class="fc" id="L16">        ships[3] = new Ship(gameBoard.getCellArrayAt(0, 3, 3, 'd'));</span>
-<span class="fc" id="L17">        ships[4] = new Ship(gameBoard.getCellArrayAt(0, 4, 2, 'd'));</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L12">        ships = gameBoard.getShipsRandomized();</span>
+<span class="fc" id="L13">    }</span>
 
     @Override
     public String getAttackCoordinates() {
-<span class="nc" id="L22">        System.out.println(&quot;Enter coordinates&quot;);</span>
-<span class="nc" id="L23">        return userInput.getStringInput();</span>
+<span class="nc" id="L17">        System.out.println(&quot;Enter coordinates&quot;);</span>
+<span class="nc" id="L18">        return userInput.getStringInput();</span>
     }
 
     @Override
     public String attackAtAndGetHitType(String coordinates) {
-<span class="nc" id="L28">        return gameBoard.attackCellAndGetHitType(coordinates);</span>
+<span class="nc" id="L23">        return gameBoard.attackCellAndGetHitType(coordinates);</span>
     }
 
     @Override
     public GameBoard getBoard() {
-<span class="fc" id="L33">        return gameBoard;</span>
+<span class="fc" id="L28">        return gameBoard;</span>
     }
 
     @Override
     public Ship[] getShips() {
-<span class="fc" id="L38">        return ships;</span>
+<span class="fc" id="L33">        return ships;</span>
     }
 
 }

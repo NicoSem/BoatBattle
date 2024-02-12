@@ -7,24 +7,18 @@ public class EasyAttackStrategy implements AttackStrategy {
     private List&lt;Cell&gt; cellsToAttack;
 
 <span class="fc" id="L9">    public EasyAttackStrategy(GameBoard gameBoard) {</span>
-<span class="fc" id="L10">        cellsToAttack = new ArrayList&lt;Cell&gt;();</span>
-<span class="fc" id="L11">        Cell[][] cells = gameBoard.getCells();</span>
-<span class="fc bfc" id="L12" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
-<span class="fc bfc" id="L13" title="All 2 branches covered.">            for (int j = 0; j &lt; 10; j++) {</span>
-<span class="fc" id="L14">                cellsToAttack.add(cells[i][j]);</span>
-            }
-        }
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L10">        cellsToAttack = gameBoard.getCellsList();</span>
+<span class="fc" id="L11">    }</span>
 
     @Override
     public String getCoordinates() {
-<span class="fc" id="L21">        int randIndex = (int) (Math.random() * cellsToAttack.size());</span>
-<span class="fc" id="L22">        Cell attackedCell = cellsToAttack.remove(randIndex);</span>
-<span class="fc" id="L23">        return attackedCell.getCoordinates();</span>
+<span class="fc" id="L15">        int randIndex = (int) (Math.random() * cellsToAttack.size());</span>
+<span class="fc" id="L16">        Cell attackedCell = cellsToAttack.remove(randIndex);</span>
+<span class="fc" id="L17">        return attackedCell.getCoordinates();</span>
     }
 
     public List&lt;Cell&gt; getCellList() {
-<span class="fc" id="L27">        return cellsToAttack;</span>
+<span class="fc" id="L21">        return cellsToAttack;</span>
     }
 
 }

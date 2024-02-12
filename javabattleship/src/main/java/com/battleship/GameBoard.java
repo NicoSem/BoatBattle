@@ -115,8 +115,9 @@ public class GameBoard {
     public Ship[] getShipsRandomized() {
         ArrayList<Cell> possibleShipLocations = getCellsList();
         boolean placed = false;
-        int[] shipSizes = {2, 3, 3, 4, 5};
-        char direction = 'd';
+        int[] shipSizes = {5, 4, 3, 3, 2};
+        int shipIndex = 0;
+        char direction = randomDirection();
         Ship[] ships = new Ship[5];
 
         for (int shipSize : shipSizes) {
@@ -130,22 +131,30 @@ public class GameBoard {
                     placed = true;
                     possibleShipLocations.remove(randIndex);
                     possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                    ships[shipIndex] = ship;
+                    shipIndex++;
                 } catch (Exception e1) {
-                    direction = 'r';
+                    if (direction == 'r'){
+                        direction = 'd';
+                    } else {
+                        direction = 'r';
+                    }
                     try{
                         Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));
                         placed = true;
                         possibleShipLocations.remove(randIndex);
                         possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                        ships[shipIndex] = ship;
+                        shipIndex++;
                     } catch (Exception e2) {
                         possibleShipLocations.remove(randIndex);
-                        direction = 'd';
+                        direction = randomDirection();
                     }
                 }
             }
         }
 
-        return new Ship[0];
+        return ships;
     }
 
     private ArrayList<Cell> removeCellsFromList(ArrayList<Cell> cellList, Cell[] cellsToRemove) {
@@ -155,4 +164,14 @@ public class GameBoard {
 
         return cellList;
     }
+
+    private char randomDirection() {
+        if (Math.random() < 0.5) {
+            return 'd';
+        } else {
+            return 'r';
+        }
+    }
+
+
 }

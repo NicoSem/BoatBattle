@@ -11,8 +11,8 @@ public class BoardTest {
         GameBoard board = new GameBoard();
         Cell cell = board.cellAt(9, 9);
 
-        Assert.assertEquals(cell.getState(), "none");
-        Assert.assertEquals(cell.getCoordinates(), "99");
+        Assert.assertEquals("none", cell.getState());
+        Assert.assertEquals("99", cell.getCoordinates());
     }
 
     @Test
@@ -20,11 +20,11 @@ public class BoardTest {
         GameBoard board = new GameBoard();
 
         Cell cell = board.cellAt(3, 4);
-        Assert.assertEquals(cell.getCoordinates(), "34");
+        Assert.assertEquals("34", cell.getCoordinates());
 
 
         cell = board.cellAt("56");
-        Assert.assertEquals(cell.getCoordinates(), "56");
+        Assert.assertEquals("56", cell.getCoordinates());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class BoardTest {
         Cell[] testArray = new Cell[1];
         testArray[0] = new Cell("00");
         Cell[] resultArray = board.getCellArrayAt(0, 0, 1, 'r');
-        Assert.assertEquals(resultArray.length, 1);
+        Assert.assertEquals(1, resultArray.length);
         Assert.assertTrue(testArray[0].equals(resultArray[0]));
 
         testArray = new Cell[5];
@@ -41,39 +41,93 @@ public class BoardTest {
             testArray[i] = new Cell(i, 0);
         }
         resultArray = board.getCellArrayAt(0, 0, 5, 'd');
-        Assert.assertEquals(resultArray.length, 5);
+        Assert.assertEquals(5, resultArray.length);
         for (int i = 0; i < 5; i++) {
-            Assert.assertEquals(resultArray[i].getCoordinates(), Integer.toString(i) + Integer.toString(0));
+            Assert.assertEquals(Integer.toString(i) + Integer.toString(0), resultArray[i].getCoordinates());
         }
 
         for (int i = 0; i < 5; i++) {
             testArray[i] = new Cell(0, i);
         }
         resultArray = board.getCellArrayAt(0, 0, 5, 'r');
-        Assert.assertEquals(resultArray.length, 5);
+        Assert.assertEquals(5, resultArray.length);
 
         for (int i = 0; i < 5; i++) {
-            Assert.assertEquals(resultArray[i].getCoordinates(), Integer.toString(0) + Integer.toString(i));
+            Assert.assertEquals(Integer.toString(0) + Integer.toString(i), resultArray[i].getCoordinates());
         }
 
         for (int i = 0; i < 5; i++) {
             testArray[i] = new Cell(4-i, 0);
         }
         resultArray = board.getCellArrayAt(4, 0, 5, 'u');
-        Assert.assertEquals(resultArray.length, 5);
+        Assert.assertEquals(5, resultArray.length);
 
         for (int i = 0; i < 5; i++) {
-            Assert.assertEquals(resultArray[i].getCoordinates(), Integer.toString(4-i) + Integer.toString(0));
+            Assert.assertEquals(Integer.toString(4-i) + Integer.toString(0), resultArray[i].getCoordinates());
         }
 
         for (int i = 0; i < 5; i++) {
             testArray[i] = new Cell(0, 4-i);
         }
         resultArray = board.getCellArrayAt(0, 4, 5, 'l');
-        Assert.assertEquals(resultArray.length, 5);
+        Assert.assertEquals(5, resultArray.length);
 
         for (int i = 0; i < 5; i++) {
-            Assert.assertEquals(resultArray[i].getCoordinates(), Integer.toString(0) + Integer.toString(4-i));
+            Assert.assertEquals(Integer.toString(0) + Integer.toString(4-i), resultArray[i].getCoordinates());
         }
+    }
+
+    @Test
+    public void testRandomShipPlacement() {
+        GameBoard gameBoard = new GameBoard();
+        Ship[] ships = gameBoard.getShipsRandomized();
+
+        Assert.assertEquals(5, ships.length);
+        Assert.assertEquals(5, ships[0].getSize());
+        Assert.assertEquals(4, ships[1].getSize());
+        Assert.assertEquals(3, ships[2].getSize());
+        Assert.assertEquals(3, ships[3].getSize());
+        Assert.assertEquals(2, ships[4].getSize());
+    }
+
+    @Test
+    public void testRowToString() {
+        GameBoard gameBoard = new GameBoard();
+
+        String actual = gameBoard.rowToString(0);
+        String expected = ". . . . . . . . . . ";
+        Assert.assertEquals(expected, actual);
+
+        gameBoard = new UserGameBoard();
+        Cell[] carrierCells = gameBoard.getCellArrayAt(0, 1, 5, 'r');
+        Cell[] destroyerCells = gameBoard.getCellArrayAt(0, 7, 2, 'r');
+
+        try {
+            Ship carrier = new Ship(carrierCells);
+            Ship destroyer = new Ship(destroyerCells);
+        } catch (Exception e) {
+            fail("Ship constructor threw unexpected exception");
+        }
+        
+        actual = gameBoard.rowToString(0);
+        expected = ". C C C C C . D D . ";
+        Assert.assertEquals(expected, actual);
+
+        gameBoard.attackCellAndGetHitType("00");
+        gameBoard.attackCellAndGetHitType("01");
+
+        actual = gameBoard.rowToString(0);
+        expected = "o x C C C C . D D . ";
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testAttack() {
+        GameBoard gameBoard = new GameBoard();
+        String expected = "miss";
+        String actual = gameBoard.attackCellAndGetHitType("00");
+        Assert.assertEquals(expected, actual);
+
     }
 }

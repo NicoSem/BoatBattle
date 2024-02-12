@@ -4,31 +4,38 @@ public class Ship {
     private int size;
     private Cell[] cells;
 
-<span class="fc" id="L7">    public Ship(Cell[] cells) {</span>
+<span class="fc" id="L7">    public Ship(Cell[] cells) throws Exception {</span>
 <span class="fc" id="L8">        size = cells.length;</span>
-<span class="pc bpc" id="L9" title="2 of 4 branches missed.">        if (size &lt; 1 || size &gt; 5) {</span>
-<span class="nc" id="L10">            throw new IllegalArgumentException(&quot;Ship of cell count &quot; + size + &quot; cannot be created&quot;);</span>
+<span class="pc bpc" id="L9" title="1 of 4 branches missed.">        if (size &lt; 1 || size &gt; 5) {</span>
+<span class="fc" id="L10">            throw new IllegalArgumentException(&quot;Ship of cell count &quot; + size + &quot; cannot be created&quot;);</span>
         } else {
 <span class="fc" id="L12">            this.cells = cells;</span>
         }
 
 <span class="fc bfc" id="L15" title="All 2 branches covered.">        for (Cell cell : this.cells) {</span>
-<span class="fc" id="L16">            cell.setShip(this);</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">            if (cell.getShip() != null) {</span>
+<span class="fc" id="L17">                throw new Exception(&quot;A ship already exists on cell &quot; + cell.getCoordinates());</span>
+            }
+<span class="fc" id="L19">            cell.setShip(this);</span>
         }
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L21">    }</span>
 
     public int getSize() {
-<span class="fc" id="L21">        return size;</span>
+<span class="fc" id="L24">        return size;</span>
     }
 
+    public Cell[] getCells() {
+<span class="fc" id="L28">        return cells;</span>
+    };
+
     public boolean isSunk() {
-<span class="nc bnc" id="L25" title="All 2 branches missed.">        for (Cell cell : cells) {</span>
-<span class="nc bnc" id="L26" title="All 2 branches missed.">            if (cell.getState() != &quot;hit&quot;) {</span>
-<span class="nc" id="L27">                return false;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (Cell cell : cells) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (cell.getState() != &quot;hit&quot;) {</span>
+<span class="nc" id="L34">                return false;</span>
             }
         }
         
-<span class="nc" id="L31">        return true;</span>
+<span class="nc" id="L38">        return true;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

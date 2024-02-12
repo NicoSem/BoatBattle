@@ -18,10 +18,10 @@ public class SinglePlayerGameController implements GameController {
 <span class="nc" id="L18">        attackingPlayer = localPlayer;</span>
 <span class="nc" id="L19">        defendingPlayer = botPlayer;</span>
 
-        while (true) {
-<span class="nc" id="L22">            playTurn(attackingPlayer, defendingPlayer);</span>
+<span class="nc" id="L21">        while (true) {</span>
+<span class="nc" id="L22">            screenWriter.printTurnResult(localPlayer.getBoard(), botPlayer.getBoard());</span>
 
-<span class="nc" id="L24">            screenWriter.printTurnResult(localPlayer.getBoard(), botPlayer.getBoard());</span>
+<span class="nc" id="L24">            playTurn(attackingPlayer, defendingPlayer);</span>
 
 <span class="nc" id="L26">            swapPlayers();</span>
         }

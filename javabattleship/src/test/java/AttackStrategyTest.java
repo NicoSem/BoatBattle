@@ -18,7 +18,7 @@ public class AttackStrategyTest {
 
         Assert.assertEquals(attackStrategyList.size(), 100);
         for (int i = 0; i < 100; i++) {
-            Assert.assertEquals(Integer.parseInt(attackStrategyList.get(i).getCoordinates()), i);
+            Assert.assertEquals(i, Integer.parseInt(attackStrategyList.get(i).getCoordinates()));
         }
     }
 
