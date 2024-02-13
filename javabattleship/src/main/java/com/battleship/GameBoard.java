@@ -76,23 +76,6 @@ public class GameBoard {
         return cellArray;
     }
 
-    private Cell[] cellArrayAt(int row, int col, int size, char direction) {
-        Cell[] cellArray = new Cell[size];
-        for (int i = 0; i < size; i++) {
-            if (direction == 'u') {
-                cellArray[i] = cells[row - i][col];
-            } else if (direction == 'd') {
-                cellArray[i] = cells[row + i][col];
-            } else if (direction == 'l') {
-                cellArray[i] = cells[row][col - i];
-            } else if (direction == 'r') {
-                cellArray[i] = cells[row][col + i];
-            }
-        }
-
-        return cellArray;
-    }
-
     public Cell[][] getCells() {
         return cells;
     }
@@ -171,6 +154,23 @@ public class GameBoard {
         } else {
             return 'r';
         }
+    }
+
+    private Cell[] cellArrayAt(int row, int col, int size, char direction) {
+        Cell[] cellArray = new Cell[size];
+        for (int i = 0; i < size; i++) {
+            if (direction == 'u') {
+                cellArray[i] = cells[row - i][col];
+            } else if (direction == 'd') {
+                cellArray[i] = cells[row + i][col];
+            } else if (direction == 'l') {
+                cellArray[i] = cells[row][col - i];
+            } else if (direction == 'r') {
+                cellArray[i] = cells[row][col + i];
+            }
+        }
+
+        return cellArray;
     }
 
 

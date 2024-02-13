@@ -9,7 +9,9 @@ public class Main {
         
         userInput = new UserInput();
         int numberOfPlayers = userInput.getIntegerInput();
-        GameController gameController = new SinglePlayerGameController();
+        Player player1 = new LocalPlayer();
+        Player player2 = new BotPlayer();
+        GameController gameController = new GameController(player1, player2);
         screenWriter.clearConsole();
 
         gameController.startGame();
