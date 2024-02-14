@@ -24,13 +24,13 @@ public class ScreenWriter {
         }
     }
 
-    public void printTurnResult(GameBoard friendlyBoard, GameBoard enemyBoard) {
+    public void printTurnResult(GameBoard friendlyBoard, int friendlyShipsLeft, String friendlyResult, GameBoard enemyBoard, int enemyShipsLeft, String enemyResult) {
         clearConsole();
 
-        System.out.println("Enemy Board");
+        System.out.println("Enemy Board | Ships left: " + enemyShipsLeft + enemyResult);
         printBoard(enemyBoard);
 
-        System.out.println("Your Board");
+        System.out.println("Your Board | Ships left: " + friendlyShipsLeft + friendlyResult);
         printBoard(friendlyBoard);
     }
 }

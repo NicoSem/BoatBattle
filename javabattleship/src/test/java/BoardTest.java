@@ -117,7 +117,7 @@ public class BoardTest {
         gameBoard.attackCellAndGetHitType("01");
 
         actual = gameBoard.rowToString(0);
-        expected = "o x C C C C . D D . ";
+        expected = ". x C C C C . D D . ";
         Assert.assertEquals(expected, actual);
 
     }

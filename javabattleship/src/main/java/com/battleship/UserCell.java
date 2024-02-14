@@ -12,9 +12,7 @@ public class UserCell extends Cell {
 
     @Override
     public String toString() {
-        if (super.getState().equals("miss")) {
-            return "o";
-        } else if (super.getState().equals("hit")) {
+        if (super.getState().equals("hit")) {
             return "x";
         } else if (super.getShip() == null) {
             return ".";
