@@ -15,23 +15,23 @@
 <span class="fc" id="L15">    };</span>
 
     public void clearConsole() {
-<span class="nc" id="L18">        System.out.print(&quot;\033[H\033[2J&quot;);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L18">        System.out.print(&quot;\033[H\033[2J&quot;);</span>
+<span class="fc" id="L19">    }</span>
 
     public void printBoard(GameBoard gameBoard) {
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 0; i &lt; 10; i++) {</span>
-<span class="nc" id="L23">            System.out.println(gameBoard.rowToString(i));</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc" id="L23">            System.out.println(gameBoard.rowToString(i));</span>
         }
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L25">    }</span>
 
-    public void printTurnResult(GameBoard friendlyBoard, GameBoard enemyBoard) {
-<span class="nc" id="L28">        clearConsole();</span>
+    public void printTurnResult(GameBoard friendlyBoard, int friendlyShipsLeft, String friendlyResult, GameBoard enemyBoard, int enemyShipsLeft, String enemyResult) {
+<span class="fc" id="L28">        clearConsole();</span>
 
-<span class="nc" id="L30">        System.out.println(&quot;Enemy Board&quot;);</span>
-<span class="nc" id="L31">        printBoard(enemyBoard);</span>
+<span class="fc" id="L30">        System.out.println(&quot;Enemy Board | Ships left: &quot; + enemyShipsLeft + enemyResult);</span>
+<span class="fc" id="L31">        printBoard(enemyBoard);</span>
 
-<span class="nc" id="L33">        System.out.println(&quot;Your Board&quot;);</span>
-<span class="nc" id="L34">        printBoard(friendlyBoard);</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L33">        System.out.println(&quot;Your Board | Ships left: &quot; + friendlyShipsLeft + friendlyResult);</span>
+<span class="fc" id="L34">        printBoard(friendlyBoard);</span>
+<span class="fc" id="L35">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

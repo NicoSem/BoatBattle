@@ -130,4 +130,16 @@ public class BoardTest {
         Assert.assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testGetCells() {
+        GameBoard gameBoard = new GameBoard();
+        Cell[][] cells = gameBoard.getCells();
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Assert.assertEquals(gameBoard.cellAt(i, j), cells[i][j]);
+            }
+        }
+    }
 }

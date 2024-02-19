@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javabattleship</a> &gt; <a href="index.source.html" class="el_package">com.battleship</a> &gt; <span class="el_source">GameController.java</span></div><h1>GameController.java</h1><pre class="source lang-java linenums">package com.battleship;
 
-<span class="nc" id="L3">public class GameController {</span>
-    
+public class GameController {
+    private static ScreenWriter screenWriter;
+    private Player player1;
+    private Player player2;
+    private GameBoard board1;
+    private GameBoard board2;
+
+<span class="fc" id="L10">    public GameController(Player player1, Player player2) {</span>
+<span class="fc" id="L11">        screenWriter = new ScreenWriter();</span>
+<span class="fc" id="L12">        this.player1 = player1;</span>
+<span class="fc" id="L13">        this.player2 = player2;</span>
+
+<span class="fc" id="L15">        board1 = player1.getBoard();</span>
+<span class="fc" id="L16">        board2 = player2.getBoard();</span>
+<span class="fc" id="L17">    }</span>
+
+    public void startGame() {
+<span class="fc" id="L20">        boolean gameFinished = false;</span>
+<span class="fc" id="L21">        String player1AttackResult = &quot;&quot;;</span>
+<span class="fc" id="L22">        String player2AttackResult = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        while (!gameFinished) {</span>
+<span class="fc" id="L25">            screenWriter.printTurnResult(board1, player1.numberOfShipsLeft(), player2AttackResult, board2, player2.numberOfShipsLeft(), player1AttackResult);</span>
+
+<span class="fc" id="L27">            player1AttackResult = playAttackAndGetResult(player1, player2);</span>
+<span class="fc" id="L28">            player2AttackResult = playAttackAndGetResult(player2, player1);</span>
+<span class="fc bfc" id="L29" title="All 4 branches covered.">            if (player1.isDefeated() || player2.isDefeated()) {</span>
+<span class="fc" id="L30">                gameFinished = true;</span>
+            }
+        }
+<span class="fc" id="L33">    }</span>
+
+    private String playAttackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
+<span class="fc" id="L36">        String attackCoordinates = attackingPlayer.getAttackCoordinates();</span>
+<span class="fc" id="L37">        String attackResult = defendingPlayer.attackAtAndGetHitType(attackCoordinates);</span>
+<span class="fc" id="L38">        return &quot; | &quot; + attackResult + &quot; at &quot; + attackCoordinates;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

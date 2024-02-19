@@ -13,4 +13,13 @@ public class GameControllerTest {
         GameController gameController = new GameController(player1, player2);
     }
 
+    @Test(timeout = 1000)
+    public void GameTerminates() {
+        Player player1 = new BotPlayer();
+        Player player2 = new BotPlayer();
+        GameController gameController = new GameController(player1, player2);
+
+        gameController.startGame();
+
+    }
 }

@@ -1,35 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BotPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">javabattleship</a> &gt; <a href="index.source.html" class="el_package">com.battleship</a> &gt; <span class="el_source">BotPlayer.java</span></div><h1>BotPlayer.java</h1><pre class="source lang-java linenums">package com.battleship;
 
-public class BotPlayer implements Player {
-    private GameBoard gameBoard;
-    private Ship[] ships;
+public class BotPlayer extends Player {
     private AttackStrategy attackStrategy;
 
-<span class="fc" id="L8">    public BotPlayer() {</span>
-<span class="fc" id="L9">        gameBoard = new GameBoard();</span>
-<span class="fc" id="L10">        attackStrategy = new EasyAttackStrategy(gameBoard);</span>
+    public BotPlayer() {
+<span class="fc" id="L7">        super();</span>
+<span class="fc" id="L8">        this.setBoard(new GameBoard());</span>
+<span class="fc" id="L9">        attackStrategy = new EasyAttackStrategy(super.getBoard());</span>
+<span class="fc" id="L10">    }</span>
 
-<span class="fc" id="L12">        ships = gameBoard.getShipsRandomized();</span>
-<span class="fc" id="L13">    }</span>
-
-    @Override
     public String getAttackCoordinates() {
-<span class="nc" id="L17">        return attackStrategy.getCoordinates();</span>
-    }
-
-    @Override
-    public String attackAtAndGetHitType(String coordinates) {
-<span class="nc" id="L22">        return gameBoard.attackCellAndGetHitType(coordinates);</span>
-    }
-
-    @Override
-    public GameBoard getBoard() {
-<span class="fc" id="L27">        return gameBoard;</span>
-    }
-
-    @Override
-    public Ship[] getShips() {
-<span class="fc" id="L32">        return ships;</span>
+<span class="fc" id="L13">        return attackStrategy.getCoordinates();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
