@@ -1,5 +1,5 @@
 package com.battleship;
 
 public interface AttackStrategy {
-    public String getCoordinates();
+    public String getCoordinates(int shipsLeft);
 }

@@ -29,7 +29,7 @@ public class AttackStrategyTest {
         List<Cell> attackStrategyList = attackStrategy.getCellList();
 
         for (int i = 0; i < 100; i++) {
-            attackStrategy.getCoordinates();
+            attackStrategy.getCoordinates(5);
         }
 
         Assert.assertTrue(attackStrategyList.isEmpty());

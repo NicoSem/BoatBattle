@@ -42,38 +42,15 @@ public class GameBoard {
     public Cell[] getCellArrayAt(int row, int col, int size, char direction) {
         Cell[] cellArray = new Cell[0];
         try {
-            if (direction == 'u') {
-                if (row + 1 - size >= 0) {
-                    cellArray = cellArrayAt(row, col, size, direction);
-                } else {
-                    throw new Exception();
-                }
-            } else if (direction == 'd') {
-                if (row + size < 10) {
-                    cellArray = cellArrayAt(row, col, size, direction);
-                } else {
-                    throw new Exception();
-                }
-            } else if (direction == 'l') {
-                if (col + 1 - size <= 0) {
-                    cellArray = cellArrayAt(row, col, size, direction);
-                } else {
-                    throw new Exception();
-                }
-            } else if (direction == 'r') {
-                if (col + size < 10) {
-                    cellArray = cellArrayAt(row, col, size, direction);
-                } else {
-                    throw new Exception();
-                }
+            if (GameBoard.maxShipSizeAt(row, col, direction) >= size) {
+                return cellArrayAt(row, col, size, direction);
             } else {
-                throw new Exception();
+                throw new Exception("Cell array out of bounds");
             }
         } catch (Exception e) {
-
+            System.out.println(e);
+            return cellArray;
         }
-
-        return cellArray;
     }
 
     public Cell[][] getCells() {
@@ -139,6 +116,37 @@ public class GameBoard {
 
         return ships;
     }
+
+    public static int maxShipSizeAt(int row, int col, char direction) {
+        if (direction == 'u') {
+            if (row > 3) {
+                return 5;
+            } else {
+                return row + 1;
+            }
+        } else if (direction == 'd') {
+            if (row < 6) {
+                return 5;
+            } else {
+                return 10 - row;
+            }
+        } else if (direction == 'l') {
+            if (col > 3) {
+                return 5;
+            } else {
+                return col + 1;
+            }
+        } else if (direction == 'r') {
+            if (col < 6) {
+                return 5;
+            } else {
+                return 10 - col;
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid direction: " + direction);
+        }
+    }
+    
 
     private ArrayList<Cell> removeCellsFromList(ArrayList<Cell> cellList, Cell[] cellsToRemove) {
         for (Cell cell : cellsToRemove) {

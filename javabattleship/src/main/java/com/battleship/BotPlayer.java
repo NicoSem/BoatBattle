@@ -10,6 +10,6 @@ public class BotPlayer extends Player {
     }
 
     public String getAttackCoordinates() {
-        return attackStrategy.getCoordinates();
+        return attackStrategy.getCoordinates(this.numberOfShipsLeft());
     }
 }

@@ -142,4 +142,37 @@ public class BoardTest {
             }
         }
     }
+
+    @Test
+    public void testMaxShipSizeAt() {
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 5, 'l'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 5, 'r'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 5, 'u'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 5, 'd'));
+
+        Assert.assertEquals(4, GameBoard.maxShipSizeAt(5, 3, 'l'));
+        Assert.assertEquals(4, GameBoard.maxShipSizeAt(5, 6, 'r'));
+        Assert.assertEquals(4, GameBoard.maxShipSizeAt(3, 5, 'u'));
+        Assert.assertEquals(4, GameBoard.maxShipSizeAt(6, 5, 'd'));
+
+        Assert.assertEquals(3, GameBoard.maxShipSizeAt(5, 2, 'l'));
+        Assert.assertEquals(3, GameBoard.maxShipSizeAt(5, 7, 'r'));
+        Assert.assertEquals(3, GameBoard.maxShipSizeAt(2, 5, 'u'));
+        Assert.assertEquals(3, GameBoard.maxShipSizeAt(7, 5, 'd'));
+
+        Assert.assertEquals(2, GameBoard.maxShipSizeAt(5, 1, 'l'));
+        Assert.assertEquals(2, GameBoard.maxShipSizeAt(5, 8, 'r'));
+        Assert.assertEquals(2, GameBoard.maxShipSizeAt(1, 5, 'u'));
+        Assert.assertEquals(2, GameBoard.maxShipSizeAt(8, 5, 'd'));
+
+        Assert.assertEquals(1, GameBoard.maxShipSizeAt(5, 0, 'l'));
+        Assert.assertEquals(1, GameBoard.maxShipSizeAt(5, 9, 'r'));
+        Assert.assertEquals(1, GameBoard.maxShipSizeAt(0, 5, 'u'));
+        Assert.assertEquals(1, GameBoard.maxShipSizeAt(9, 5, 'd'));
+
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 7, 'l'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(5, 3, 'r'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(7, 5, 'u'));
+        Assert.assertEquals(5, GameBoard.maxShipSizeAt(3, 5, 'd'));
+    }
 }
