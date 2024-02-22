@@ -90,7 +90,7 @@ public class GameBoard {
                     Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));
                     placed = true;
                     possibleShipLocations.remove(randIndex);
-                    possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                    possibleShipLocations = Cell.removeCellsFromList(possibleShipLocations, ship.getCells());
                     ships[shipIndex] = ship;
                     shipIndex++;
                 } catch (Exception e1) {
@@ -103,7 +103,7 @@ public class GameBoard {
                         Ship ship = new Ship(getCellArrayAt(cellIntCoordintes[0], cellIntCoordintes[1], shipSize, direction));
                         placed = true;
                         possibleShipLocations.remove(randIndex);
-                        possibleShipLocations = removeCellsFromList(possibleShipLocations, ship.getCells());
+                        possibleShipLocations = Cell.removeCellsFromList(possibleShipLocations, ship.getCells());
                         ships[shipIndex] = ship;
                         shipIndex++;
                     } catch (Exception e2) {
@@ -148,13 +148,7 @@ public class GameBoard {
     }
     
 
-    private ArrayList<Cell> removeCellsFromList(ArrayList<Cell> cellList, Cell[] cellsToRemove) {
-        for (Cell cell : cellsToRemove) {
-            cellList.remove(cell);
-        }
-
-        return cellList;
-    }
+    
 
     private char randomDirection() {
         if (Math.random() < 0.5) {

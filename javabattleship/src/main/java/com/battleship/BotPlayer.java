@@ -3,10 +3,10 @@ package com.battleship;
 public class BotPlayer extends Player {
     private AttackStrategy attackStrategy;
 
-    public BotPlayer() {
+    public BotPlayer(AttackStrategy attackStrategy) {
         super();
         this.setBoard(new GameBoard());
-        attackStrategy = new EasyAttackStrategy(super.getBoard());
+        this.attackStrategy = attackStrategy;
     }
 
     public String getAttackCoordinates() {

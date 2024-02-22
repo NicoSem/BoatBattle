@@ -1,5 +1,6 @@
 package com.battleship;
 
+import java.util.ArrayList;
 import java.util.regex.*;
 
 public class Cell {
@@ -84,5 +85,12 @@ public class Cell {
 
     public boolean equals(Cell otherCell) {
         return this.getCoordinates().equals(otherCell.getCoordinates());
+    }
+
+    public static ArrayList<Cell> removeCellsFromList(ArrayList<Cell> cellList, Cell[] cellsToRemove) {
+        for (Cell cell : cellsToRemove) {
+            cellList.remove(cell);
+        }
+        return cellList;
     }
 }
