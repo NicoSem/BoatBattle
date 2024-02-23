@@ -28,7 +28,7 @@ public class PlayerTest {
     @Test
     public void TestBotPlayerConstructor() {
         GameBoard gameBoard = new GameBoard();
-        Player botPlayer = new BotPlayer(new EasyAttackStrategy(gameBoard));
+        Player botPlayer = new BotPlayer(new EasyAttackStrategy());
 
         Assert.assertNotNull(gameBoard);
         Assert.assertEquals(gameBoard.getClass(), GameBoard.class);

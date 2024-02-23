@@ -6,9 +6,7 @@ public abstract class Player {
 
     public abstract String getAttackCoordinates();
 
-    public String attackAtAndGetHitType(String coordinates) {
-        return gameBoard.attackCellAndGetHitType(coordinates);
-    }
+    public abstract String attackAtAndGetHitType(String coordinates);
 
     public GameBoard getBoard(){
         return gameBoard;

@@ -9,9 +9,16 @@ public class Main {
         
         userInput = new UserInput();
         int numberOfPlayers = userInput.getIntegerInput();
-        Player player1 = new LocalPlayer();
-        Player player2 = new BotPlayer(new EasyAttackStrategy(player1.getBoard()));
-        GameController gameController = new GameController(player1, player2);
+        GameController gameController = null;
+        if (numberOfPlayers == 1) {
+            Player player1 = new LocalPlayer();
+            Player player2 = new BotPlayer(new EasyAttackStrategy());
+            gameController = new GameController(player1, player2);
+        }
+        else if (numberOfPlayers == 2) {
+            // TODO local multiplayer game
+        }
+        
         screenWriter.clearConsole();
 
         gameController.startGame();

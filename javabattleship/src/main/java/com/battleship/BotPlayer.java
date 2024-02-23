@@ -9,7 +9,13 @@ public class BotPlayer extends Player {
         this.attackStrategy = attackStrategy;
     }
 
+    @Override
     public String getAttackCoordinates() {
-        return attackStrategy.getCoordinates(this.numberOfShipsLeft());
+        return attackStrategy.getCoordinates("");
+    }
+
+    @Override
+    public String attackAtAndGetHitType(String coordinates) {
+        return this.getBoard().attackCellAndGetHitType(coordinates);
     }
 }

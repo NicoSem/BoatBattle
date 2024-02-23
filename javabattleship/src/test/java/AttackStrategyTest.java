@@ -11,27 +11,17 @@ import org.junit.Assert;
 public class AttackStrategyTest {
 
     @Test
-    public void TestEasyConstructor() {
-        GameBoard gameBoard = new GameBoard();
-        EasyAttackStrategy attackStrategy = new EasyAttackStrategy(gameBoard);
-        List<Cell> attackStrategyList = attackStrategy.getCellList();
-
-        Assert.assertEquals(attackStrategyList.size(), 100);
-        for (int i = 0; i < 100; i++) {
-            Assert.assertEquals(i, Integer.parseInt(attackStrategyList.get(i).getCoordinates()));
-        }
-    }
-
-    @Test
     public void TestEasyBoardCoverage() {
         GameBoard gameBoard = new GameBoard();
-        EasyAttackStrategy attackStrategy = new EasyAttackStrategy(gameBoard);
-        List<Cell> attackStrategyList = attackStrategy.getCellList();
+        EasyAttackStrategy attackStrategy = new EasyAttackStrategy();
 
         for (int i = 0; i < 100; i++) {
-            attackStrategy.getCoordinates(5);
+            gameBoard.attackCellAndGetHitType(attackStrategy.getCoordinates(""));
         }
 
-        Assert.assertTrue(attackStrategyList.isEmpty());
+        List<Cell> cells = gameBoard.getCellsList();
+        for (Cell cell : cells) {
+            Assert.assertFalse(cell.getState().equals("none"));
+        }
     }
 }
