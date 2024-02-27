@@ -4,6 +4,7 @@ public class LanPlayer extends Player {
 
     public LanPlayer() {
         super();
+        this.setBoard(new GameBoard());
     }
 
     @Override

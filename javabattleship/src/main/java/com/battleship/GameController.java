@@ -6,6 +6,7 @@ public class GameController {
     private Player player2;
     private GameBoard board1;
     private GameBoard board2;
+    private Game game;
 
     public GameController(Player player1, Player player2) {
         screenWriter = new ScreenWriter();
@@ -14,27 +15,16 @@ public class GameController {
 
         board1 = player1.getBoard();
         board2 = player2.getBoard();
-    }
 
-    public void startGame() {
-        boolean gameFinished = false;
-        String player1AttackResult = "";
-        String player2AttackResult = "";
-
-        while (!gameFinished) {
-            screenWriter.printTurnResult(board1, player1.numberOfShipsLeft(), player2AttackResult, board2, player2.numberOfShipsLeft(), player1AttackResult);
-
-            player1AttackResult = playAttackAndGetResult(player1, player2);
-            player2AttackResult = playAttackAndGetResult(player2, player1);
-            if (player1.isDefeated() || player2.isDefeated()) {
-                gameFinished = true;
-            }
+        if (player1.getClass() == LanPlayer.class || player2.getClass() == LanPlayer.class) {
+            game = new MultiPlayerGame();
+            throw new UnsupportedOperationException("Multiplayer unimplemented");
+        } else {
+            game = new SinglePlayerGame(player1, player2);
         }
     }
 
-    private String playAttackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
-        String attackCoordinates = attackingPlayer.getAttackCoordinates();
-        String attackResult = defendingPlayer.attackAtAndGetHitType(attackCoordinates);
-        return " | " + attackResult + " at " + attackCoordinates;
+    public void startGame() {
+        game.startGame();
     }
 }
