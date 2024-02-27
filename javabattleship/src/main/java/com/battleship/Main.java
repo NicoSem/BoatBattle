@@ -19,8 +19,16 @@ public class Main {
             player2 = new BotPlayer(new EasyAttackStrategy());
         }
         else if (numberOfPlayers == 2) {
-            player1 = new LocalPlayer();
-            player2 = new LanPlayer();
+            System.out.println("Enter host or join");
+            String connectionType = userInput.getStringInput();
+            if (connectionType.equals("host")){
+                player1 = new LocalPlayer();
+                player2 = new LanPlayer();
+            } else {
+                GameClient gameClient = new GameClient();
+                gameClient.startConnection("127.0.0.1", 6000);
+            }
+
         }
 
         GameController gameController = new GameController(player1, player2);
