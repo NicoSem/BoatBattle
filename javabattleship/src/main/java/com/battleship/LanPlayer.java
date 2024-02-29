@@ -18,8 +18,7 @@ public class LanPlayer extends Player {
 
     @Override
     public String attackAtAndGetHitType(String coordinates) {
-        // TODO Auto-generated method stub
-        return "miss";
+        return gameServer.sendCoordinatesAndGetResult(coordinates);
     }
 
 }

@@ -24,15 +24,15 @@ public class GameController {
         while (!gameFinished) {
             screenWriter.printTurnResult(board1, player1.numberOfShipsLeft(), player2AttackResult, board2, player2.numberOfShipsLeft(), player1AttackResult);
 
-            player1AttackResult = playAttackAndGetResult(player1, player2);
-            player2AttackResult = playAttackAndGetResult(player2, player1);
+            player1AttackResult = attackAndGetResult(player1, player2);
+            player2AttackResult = attackAndGetResult(player2, player1);
             if (player1.isDefeated() || player2.isDefeated()) {
                 gameFinished = true;
             }
         }
     }
 
-    public String playAttackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
+    public String attackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
         String attackCoordinates = attackingPlayer.getAttackCoordinates();
         String attackResult = defendingPlayer.attackAtAndGetHitType(attackCoordinates);
         return " | " + attackResult + " at " + attackCoordinates;

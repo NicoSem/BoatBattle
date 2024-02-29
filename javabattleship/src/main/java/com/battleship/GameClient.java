@@ -5,26 +5,19 @@ import java.io.*;
 
 public class GameClient {
     private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private DataOutputStream out;
+    private DataInputStream in;
 
     public void startConnection(String ip, int port) {
         try {
             clientSocket = new Socket(ip, port);
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new DataOutputStream(clientSocket.getOutputStream());
+            in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            while(!in.readUTF().equals("done")){
+                System.out.println(in.readUTF());
+                out.writeUTF("55");
+            }
         } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
-
-    public String sendMessage(String msg) {
-        try {
-            out.println(msg);
-            String resp = in.readLine();
-            return resp;
-        } catch (Exception e) {
-            return "ERROR";
             // TODO: handle exception
         }
     }
@@ -37,5 +30,9 @@ public class GameClient {
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    public boolean isConnected() {
+        return clientSocket.isConnected();
     }
 }

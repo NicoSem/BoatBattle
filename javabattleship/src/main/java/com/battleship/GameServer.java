@@ -6,15 +6,15 @@ import java.io.*;
 public class GameServer {
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private DataOutputStream out;
+    private DataInputStream in;
 
     public void start(int port) {
         try {
             serverSocket = new ServerSocket(port);
             clientSocket = serverSocket.accept();
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new DataOutputStream(clientSocket.getOutputStream());
+            in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -23,12 +23,22 @@ public class GameServer {
 
     public String getCoordinates() {
         try {
-            out.println("enter coordinates");
-            return in.readLine();
+            return in.readUTF();
         } catch (Exception e) {
+            System.out.println(e);
             return "00";
         }
         
+    }
+
+    public String sendCoordinatesAndGetResult(String coordinates) {
+        try {
+            out.writeUTF(coordinates);
+            return in.readUTF();
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Miss";
+        }
     }
 
     public void stop() {
@@ -44,6 +54,6 @@ public class GameServer {
     }
     public static void main(String[] args) {
         GameServer server = new GameServer();
-        server.start(6666);
+        server.start(6000);
     }
 }
