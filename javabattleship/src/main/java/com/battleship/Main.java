@@ -27,8 +27,8 @@ public class Main {
                 player2 = new LanPlayer();
                 createAndStartGame(player1, player2);
             } else {
-                GameClient gameClient = new GameClient();
-                gameClient.startConnection("127.0.0.1", 6000);
+                LocalPlayer player = new LocalPlayer();
+                GameClient gameClient = new GameClient("127.0.0.1", 6000, player);
             }
 
         }

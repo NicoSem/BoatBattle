@@ -19,5 +19,4 @@ public class LocalPlayer extends Player {
     public String attackAtAndGetHitType(String coordinates) {
         return this.getBoard().attackCellAndGetHitType(coordinates);
     }
-
 }

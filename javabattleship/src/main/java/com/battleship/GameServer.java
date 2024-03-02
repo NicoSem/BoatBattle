@@ -34,10 +34,11 @@ public class GameServer {
     public String sendCoordinatesAndGetResult(String coordinates) {
         try {
             out.writeUTF(coordinates);
-            return in.readUTF();
+            out.flush();
+            return "miss";
         } catch (Exception e) {
             System.out.println(e);
-            return "Miss";
+            return "miss";
         }
     }
 
