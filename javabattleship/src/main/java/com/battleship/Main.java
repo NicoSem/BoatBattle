@@ -24,7 +24,7 @@ public class Main {
             String connectionType = userInput.getStringInput();
             if (connectionType.equals("host")){
                 player1 = new LocalPlayer();
-                player2 = new LanPlayer();
+                player2 = new LanPlayer(player1.getBoard());
                 createAndStartGame(player1, player2);
             } else {
                 LocalPlayer player = new LocalPlayer();

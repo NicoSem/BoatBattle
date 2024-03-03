@@ -28,14 +28,22 @@ public class GameServer {
             System.out.println(e);
             return "00";
         }
-        
+    }
+
+    public void sendAttackResult(String result) {
+        try {
+            out.writeUTF(result);
+            out.flush();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public String sendCoordinatesAndGetResult(String coordinates) {
         try {
             out.writeUTF(coordinates);
             out.flush();
-            return "miss";
+            return in.readUTF();
         } catch (Exception e) {
             System.out.println(e);
             return "miss";

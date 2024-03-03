@@ -50,7 +50,7 @@ public class Cell {
         }
     }
 
-    private static boolean isValidCoordinates(String coordinateToCheck) {
+    public static boolean isValidCoordinates(String coordinateToCheck) {
         Pattern pattern = Pattern.compile("\\b[0-9][0-9]\\b");
         Matcher matcher = pattern.matcher(coordinateToCheck);
         if (matcher.find()) {
@@ -66,6 +66,10 @@ public class Cell {
 
     public String getState() {
         return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCoordinates() {
