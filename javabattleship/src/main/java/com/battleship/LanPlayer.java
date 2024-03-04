@@ -32,4 +32,8 @@ public class LanPlayer extends Player {
         gameServer.sendAttackResult(result);
     }
 
+    public void stopServer() {
+        gameServer.stop();
+    }
+
 }

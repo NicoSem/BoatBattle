@@ -6,37 +6,54 @@ import java.io.*;
 
 public class GameClient {
     private Socket clientSocket;
+
     private DataOutputStream out;
     private DataInputStream in;
-    private LocalPlayer localPlayer;
-    private GameBoard friendlyBoard;
+
+    private Thread sender;
+    private Thread receiver;
+
+    private Player player;
+
+    private GameBoard playerBoard;
     private GameBoard enemyBoard;
+
     private Semaphore turnSemaphore;
+
     private ScreenWriter screenWriter;
+
     private String coordinates;
 
-    public GameClient(String ip, int port, LocalPlayer player) {
-        localPlayer = player;
-        friendlyBoard = localPlayer.getBoard();
+    private boolean isGameRunning;
+
+    public GameClient(Player player) {
+        this.player = player;
+        playerBoard = player.getBoard();
         enemyBoard = new GameBoard();
         screenWriter = new ScreenWriter();
+        turnSemaphore = new Semaphore(0);
+        isGameRunning = false;
+    }
+
+    public void startConnection(String ip, int port) {
+        
+        isGameRunning = true;
+
         try {
             clientSocket = new Socket(ip, port);
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-            localPlayer = player;
-            turnSemaphore = new Semaphore(0);
-            screenWriter.printTurnResult(friendlyBoard, 5, "", enemyBoard, 5, "");
+            screenWriter.printTurnResult(playerBoard, 5, "", enemyBoard, 5, "");
 
             
-            Thread sender = new Thread(new Runnable() {
+            sender = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (isGameRunning) {
                         try {
-                            screenWriter.printTurnResult(friendlyBoard, 5, "", enemyBoard, 5, "");
+                            screenWriter.printTurnResult(playerBoard, 5, "", enemyBoard, 5, "");
                             turnSemaphore.acquire();
-                            coordinates = localPlayer.getAttackCoordinates();
+                            coordinates = player.getAttackCoordinates();
                             out.writeUTF(coordinates);
                             out.flush();
                         } catch (Exception e) {
@@ -46,17 +63,17 @@ public class GameClient {
                 }
             });
 
-            Thread receiver = new Thread(new Runnable() {
+            receiver = new Thread(new Runnable() {
                 String msg;
                 @Override
                 public void run() {
                     try {
                         msg = "";
                         coordinates = "";
-                        while(!msg.equals("done")) {   
+                        while(isGameRunning && !msg.equals("done")) {   
                             msg = in.readUTF();
                             if (Cell.isValidCoordinates(msg)){
-                                String attackResult = localPlayer.attackAtAndGetHitType(msg);
+                                String attackResult = player.attackAtAndGetHitType(msg);
                                 out.writeUTF(attackResult);
                                 out.flush();
                                 turnSemaphore.release();
@@ -75,8 +92,6 @@ public class GameClient {
         } catch (Exception e) {
             // TODO: handle exception
         }
-
-        
     }
 
     public void stopConnection() {
@@ -84,9 +99,15 @@ public class GameClient {
             in.close();
             out.close();
             clientSocket.close();
+            stopThreads();
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    private void stopThreads() {
+        isGameRunning = false;
+        turnSemaphore.release();
     }
 
     public boolean isConnected() {

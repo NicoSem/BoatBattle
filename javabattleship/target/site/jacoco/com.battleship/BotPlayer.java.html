@@ -3,14 +3,20 @@
 public class BotPlayer extends Player {
     private AttackStrategy attackStrategy;
 
-    public BotPlayer() {
+    public BotPlayer(AttackStrategy attackStrategy) {
 <span class="fc" id="L7">        super();</span>
 <span class="fc" id="L8">        this.setBoard(new GameBoard());</span>
-<span class="fc" id="L9">        attackStrategy = new EasyAttackStrategy(super.getBoard());</span>
+<span class="fc" id="L9">        this.attackStrategy = attackStrategy;</span>
 <span class="fc" id="L10">    }</span>
 
+    @Override
     public String getAttackCoordinates() {
-<span class="fc" id="L13">        return attackStrategy.getCoordinates();</span>
+<span class="fc" id="L14">        return attackStrategy.getCoordinates(&quot;&quot;);</span>
+    }
+
+    @Override
+    public String attackAtAndGetHitType(String coordinates) {
+<span class="fc" id="L19">        return this.getBoard().attackCellAndGetHitType(coordinates);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -23,16 +23,16 @@ public class Main {
             System.out.println("Enter host or join");
             String connectionType = userInput.getStringInput();
             if (connectionType.equals("host")){
+                System.out.println("Waiting for player2...");
                 player1 = new LocalPlayer();
                 player2 = new LanPlayer(player1.getBoard());
                 createAndStartGame(player1, player2);
             } else {
                 LocalPlayer player = new LocalPlayer();
-                GameClient gameClient = new GameClient("127.0.0.1", 6000, player);
+                GameClient gameClient = new GameClient(player);
+                gameClient.startConnection("127.0.0.1", 6000);
             }
-
         }
-
     }
 
     private static void createAndStartGame(Player player1, Player player2) {

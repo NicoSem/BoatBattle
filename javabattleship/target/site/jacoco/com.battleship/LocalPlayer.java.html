@@ -15,5 +15,9 @@ public class LocalPlayer extends Player {
 <span class="nc" id="L15">        return userInput.getStringInput();</span>
     }
 
+    @Override
+    public String attackAtAndGetHitType(String coordinates) {
+<span class="nc" id="L20">        return this.getBoard().attackCellAndGetHitType(coordinates);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

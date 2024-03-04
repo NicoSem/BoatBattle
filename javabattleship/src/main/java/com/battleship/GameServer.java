@@ -6,8 +6,11 @@ import java.io.*;
 public class GameServer {
     private ServerSocket serverSocket;
     private Socket clientSocket;
+
     private DataOutputStream out;
     private DataInputStream in;
+
+    private String serverStatus;
 
     public void start(int port) {
         try {
@@ -15,17 +18,23 @@ public class GameServer {
             clientSocket = serverSocket.accept();
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            serverStatus = "OK";
         } catch (Exception e) {
-            // TODO: handle exception
+            serverStatus = "FAILED TO INITIALIZE";
+            System.out.println("Server status: " + serverStatus + " | " + e);
         }
-        
     }
 
     public String getCoordinates() {
         try {
-            return in.readUTF();
+            String receivedCoordinates = in.readUTF();
+            if (Cell.isValidCoordinates(receivedCoordinates)) {
+                return receivedCoordinates;
+            } else {
+                return "00";
+            }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Server status: " + serverStatus + " | " + e);
             return "00";
         }
     }
@@ -35,7 +44,7 @@ public class GameServer {
             out.writeUTF(result);
             out.flush();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Server status: " + serverStatus + " | " + e);
         }
     }
 
@@ -45,7 +54,7 @@ public class GameServer {
             out.flush();
             return in.readUTF();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Server status: " + serverStatus + " | " + e);
             return "miss";
         }
     }
@@ -57,12 +66,9 @@ public class GameServer {
             clientSocket.close();
             serverSocket.close();
         } catch (Exception e) {
-            // TODO: handle exception
+            serverStatus = "FAILED TO CLOSE";
+            System.out.println("Server status: " + serverStatus + " | " + e);
         }
         
-    }
-    public static void main(String[] args) {
-        GameServer server = new GameServer();
-        server.start(6000);
     }
 }

@@ -3,19 +3,44 @@
 <span class="nc" id="L3">public class Main {</span>
     private static ScreenWriter screenWriter;
     private static UserInput userInput;
-    public static void main(String[] args) throws Exception {
-<span class="nc" id="L7">        screenWriter = new ScreenWriter();</span>
-<span class="nc" id="L8">        screenWriter.printStartMenu();</span>
-        
-<span class="nc" id="L10">        userInput = new UserInput();</span>
-<span class="nc" id="L11">        int numberOfPlayers = userInput.getIntegerInput();</span>
-<span class="nc" id="L12">        Player player1 = new LocalPlayer();</span>
-<span class="nc" id="L13">        Player player2 = new BotPlayer();</span>
-<span class="nc" id="L14">        GameController gameController = new GameController(player1, player2);</span>
-<span class="nc" id="L15">        screenWriter.clearConsole();</span>
 
-<span class="nc" id="L17">        gameController.startGame();</span>
+    public static void main(String[] args) throws Exception {
+<span class="nc" id="L8">        screenWriter = new ScreenWriter();</span>
+<span class="nc" id="L9">        screenWriter.printStartMenu();</span>
         
-<span class="nc" id="L19">    }</span>
+<span class="nc" id="L11">        Player player1 = null;</span>
+<span class="nc" id="L12">        Player player2 = null;</span>
+
+<span class="nc" id="L14">        userInput = new UserInput();</span>
+<span class="nc" id="L15">        int numberOfPlayers = userInput.getIntegerInput();</span>
+        
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        if (numberOfPlayers == 1) {</span>
+<span class="nc" id="L18">            player1 = new LocalPlayer();</span>
+<span class="nc" id="L19">            player2 = new BotPlayer(new EasyAttackStrategy());</span>
+<span class="nc" id="L20">            createAndStartGame(player1, player2);</span>
+        }
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        else if (numberOfPlayers == 2) {</span>
+<span class="nc" id="L23">            System.out.println(&quot;Enter host or join&quot;);</span>
+<span class="nc" id="L24">            String connectionType = userInput.getStringInput();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            if (connectionType.equals(&quot;host&quot;)){</span>
+<span class="nc" id="L26">                player1 = new LocalPlayer();</span>
+<span class="nc" id="L27">                player2 = new LanPlayer(player1.getBoard());</span>
+<span class="nc" id="L28">                createAndStartGame(player1, player2);</span>
+            } else {
+<span class="nc" id="L30">                LocalPlayer player = new LocalPlayer();</span>
+<span class="nc" id="L31">                GameClient gameClient = new GameClient(&quot;127.0.0.1&quot;, 6000, player);</span>
+            }
+
+        }
+
+<span class="nc" id="L36">    }</span>
+
+    private static void createAndStartGame(Player player1, Player player2) {
+<span class="nc" id="L39">        GameController gameController = new GameController(player1, player2);</span>
+        
+<span class="nc" id="L41">        screenWriter.clearConsole();</span>
+
+<span class="nc" id="L43">        gameController.startGame();</span>
+<span class="nc" id="L44">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

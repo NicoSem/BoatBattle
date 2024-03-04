@@ -24,15 +24,15 @@ public class GameController {
 <span class="fc bfc" id="L24" title="All 2 branches covered.">        while (!gameFinished) {</span>
 <span class="fc" id="L25">            screenWriter.printTurnResult(board1, player1.numberOfShipsLeft(), player2AttackResult, board2, player2.numberOfShipsLeft(), player1AttackResult);</span>
 
-<span class="fc" id="L27">            player1AttackResult = playAttackAndGetResult(player1, player2);</span>
-<span class="fc" id="L28">            player2AttackResult = playAttackAndGetResult(player2, player1);</span>
-<span class="fc bfc" id="L29" title="All 4 branches covered.">            if (player1.isDefeated() || player2.isDefeated()) {</span>
+<span class="fc" id="L27">            player1AttackResult = attackAndGetResult(player1, player2);</span>
+<span class="fc" id="L28">            player2AttackResult = attackAndGetResult(player2, player1);</span>
+<span class="pc bpc" id="L29" title="1 of 4 branches missed.">            if (player1.isDefeated() || player2.isDefeated()) {</span>
 <span class="fc" id="L30">                gameFinished = true;</span>
             }
         }
 <span class="fc" id="L33">    }</span>
 
-    private String playAttackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
+    public String attackAndGetResult(Player attackingPlayer, Player defendingPlayer) {
 <span class="fc" id="L36">        String attackCoordinates = attackingPlayer.getAttackCoordinates();</span>
 <span class="fc" id="L37">        String attackResult = defendingPlayer.attackAtAndGetHitType(attackCoordinates);</span>
 <span class="fc" id="L38">        return &quot; | &quot; + attackResult + &quot; at &quot; + attackCoordinates;</span>

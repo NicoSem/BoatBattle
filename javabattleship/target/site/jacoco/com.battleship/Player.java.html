@@ -6,47 +6,45 @@
 
     public abstract String getAttackCoordinates();
 
-    public String attackAtAndGetHitType(String coordinates) {
-<span class="fc" id="L10">        return gameBoard.attackCellAndGetHitType(coordinates);</span>
-    }
+    public abstract String attackAtAndGetHitType(String coordinates);
 
     public GameBoard getBoard(){
-<span class="fc" id="L14">        return gameBoard;</span>
+<span class="fc" id="L12">        return gameBoard;</span>
     }
 
     public void setBoard(GameBoard gameBoard) {
-<span class="fc" id="L18">        this.gameBoard = gameBoard;</span>
-<span class="fc" id="L19">        setShipsRandom();</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L16">        this.gameBoard = gameBoard;</span>
+<span class="fc" id="L17">        setShipsRandom();</span>
+<span class="fc" id="L18">    }</span>
 
     public void setShips(Ship[] ships) {
-<span class="nc" id="L23">        this.ships = ships;</span>
-<span class="nc" id="L24">    }</span>
+<span class="nc" id="L21">        this.ships = ships;</span>
+<span class="nc" id="L22">    }</span>
 
     public void setShipsRandom() {
-<span class="fc" id="L27">        ships = gameBoard.getShipsRandomized();</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L25">        ships = gameBoard.getShipsRandomized();</span>
+<span class="fc" id="L26">    }</span>
 
     public Ship[] getShips() {
-<span class="fc" id="L31">        return ships;</span>
+<span class="fc" id="L29">        return ships;</span>
     }
 
     public int numberOfShipsLeft() {
-<span class="fc" id="L35">        int shipsLeft = 5;</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (Ship ship : ships) {</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">            if (ship.isSunk()) {</span>
-<span class="fc" id="L38">                shipsLeft--;</span>
+<span class="fc" id="L33">        int shipsLeft = 5;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Ship ship : ships) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if (ship.isSunk()) {</span>
+<span class="fc" id="L36">                shipsLeft--;</span>
             }
         }
 
-<span class="fc" id="L42">        return shipsLeft;</span>
+<span class="fc" id="L40">        return shipsLeft;</span>
     }
 
     public boolean isDefeated() {
-<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (numberOfShipsLeft() == 0) {</span>
-<span class="fc" id="L47">            return true;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (numberOfShipsLeft() == 0) {</span>
+<span class="fc" id="L45">            return true;</span>
         } else {
-<span class="fc" id="L49">            return false;</span>
+<span class="fc" id="L47">            return false;</span>
         }
     }
 }
